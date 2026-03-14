@@ -302,6 +302,11 @@ nav.active{
 display:flex;
 }
 
+.contact-form select{
+padding:15px;
+border:1px solid #ccc;
+border-radius:5px;
+width:100%;
 }
 
 </style>
@@ -497,13 +502,32 @@ We export premium agricultural products from India to buyers worldwide through t
 <p>🌍 Exporting Worldwide</p>
 </div>
 
-<form class="contact-form" action="https://formsubmit.co/depu.sep13@gmail.com" method="POST">
+<form id="inquiryForm" class="contact-form" action="https://formsubmit.co/depu.sep13@gmail.com" method="POST">
 
-<input type="text" name="name" placeholder="Your Name" required>
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="New Export Inquiry">
 
-<input type="email" name="email" placeholder="Your Email" required>
+<input type="text" name="name" placeholder="Full Name" required>
 
-<textarea name="message" rows="5" placeholder="Product & Quantity"></textarea>
+<input type="email" name="email" placeholder="Business Email" required>
+
+<input type="text" name="company" placeholder="Company Name">
+
+<select name="product" required>
+<option value="">Select Product</option>
+<option>Basmati Rice</option>
+<option>Non Basmati Rice</option>
+<option>Wheat</option>
+<option>Bananas</option>
+<option>Onions</option>
+<option>Turmeric</option>
+<option>Pulses</option>
+<option>Dry Red Chilli</option>
+</select>
+
+<input type="text" name="quantity" placeholder="Required Quantity (Example: 20 Tons)">
+
+<textarea name="message" rows="4" placeholder="Additional Details"></textarea>
 
 <button type="submit">Send Inquiry</button>
 
@@ -544,6 +568,20 @@ const nav=document.querySelector("nav");
 toggle.onclick=function(){
 nav.classList.toggle("active");
 }
+
+document.getElementById("inquiryForm").addEventListener("submit", function(){
+
+let name=document.querySelector('input[name="name"]').value;
+let product=document.querySelector('select[name="product"]').value;
+let qty=document.querySelector('input[name="quantity"]').value;
+
+let message="Hello I am "+name+" I want to inquire about "+product+" Quantity: "+qty;
+
+let url="https://wa.me/919160666483?text="+encodeURIComponent(message);
+
+window.open(url,"_blank");
+
+});
 
 };
 
