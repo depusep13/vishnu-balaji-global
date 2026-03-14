@@ -1,0 +1,499 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishnu Balaji Global | Premium Exports & Imports India</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Vishnu Balaji Global Imports & Exports",
+      "image": "logo.png",
+      "telephone": "+91-9160666483",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "founder": "Sandeep Solanke"
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #051630;
+            --accent: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f2d388 100%);
+            --text-gray: #64748b;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--white);
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.4s;
+        }
+
+        header.scrolled {
+            background: rgba(5, 22, 48, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 12px 6%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .logo { display: flex; align-items: center; color: white; text-decoration: none; }
+        .logo img { height: 45px; margin-right: 12px; }
+        .logo h1 { font-size: 1.1rem; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; }
+
+        nav a { color: white; margin-left: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(5,22,48,0.3), rgba(5,22,48,0.8));
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 900px; padding: 20px; }
+        .hero h2 { font-size: clamp(36px, 8vw, 70px); line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
+        .hero p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; font-weight: 300; letter-spacing: 1px; }
+
+        .btn-main {
+            padding: 18px 45px;
+            background: var(--gold-gradient);
+            color: var(--primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4); background: var(--white); }
+
+        /* --- SECTIONS --- */
+        section { padding: 100px 8%; text-align: center; }
+        .section-title { font-size: 38px; font-weight: 800; color: var(--primary); margin-bottom: 50px; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent); margin: 15px auto; }
+
+        /* --- PRODUCT GRID --- */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-top: 50px; 
+        }
+
+        .product-card { 
+            position: relative; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            height: 380px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: 0.4s;
+        }
+
+        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        
+        .product-tag {
+            position: absolute; top: 15px; left: 15px;
+            background: var(--primary); color: var(--accent);
+            padding: 6px 12px; font-size: 10px; font-weight: 800;
+            text-transform: uppercase; border-radius: 2px; z-index: 10;
+            border: 1px solid var(--accent);
+        }
+
+        .product-info { 
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 25px; 
+            background: linear-gradient(transparent, rgba(5,22,48,0.95)); 
+            color: white; text-align: left;
+        }
+
+        .product-card:hover img { transform: scale(1.1); }
+        .product-card:hover { transform: translateY(-10px); }
+
+        /* --- STATS --- */
+        .stats { background: var(--primary); color: white; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .stats h3 { font-size: 55px; color: var(--accent); font-weight: 800; margin-bottom: 5px; }
+        .stats p { text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; opacity: 0.7; }
+
+        /* --- CONTACT --- */
+        .contact-wrapper {
+            max-width: 1100px; margin: auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; text-align: left;
+        }
+        .contact-info h3 { font-size: 24px; margin-bottom: 20px; color: var(--primary); }
+        .contact-info p { margin-bottom: 10px; color: var(--text-gray); }
+
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .contact-form input, .contact-form textarea { 
+            padding: 18px; border: 1px solid #e2e8f0; border-radius: 8px; 
+            font-family: inherit; font-size: 1rem; background: #f8fafc;
+        }
+        .contact-form button { 
+            padding: 18px; background: var(--primary); color: white; 
+            border: none; border-radius: 8px; cursor: pointer; font-weight: 700; 
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .contact-form button:hover { background: var(--accent); color: var(--primary); }
+
+        /* --- REVEAL ON SCROLL --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- WHATSAPP --- */
+        .whatsapp {
+            position: fixed; bottom: 30px; right: 30px; background: #25D366;
+            width: 60px; height: 60px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: white; font-size: 30px;
+            z-index: 1000; box-shadow: 0 10px 25px rgba(37,211,102,0.3); text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            section { padding: 60px 6%; }
+        }
+/* --- TRUST SECTION STYLES --- */
+.cert-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: 0.3s;
+}
+.cert-grid:hover { opacity: 1; filter: grayscale(0%); }
+.cert-item { font-weight: 800; font-size: 1.2rem; color: #94a3b8; }
+.cert-item img { height: 60px; object-fit: contain; }
+
+.trade-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.trade-box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--accent);
+    text-align: left;
+}
+.trade-box h4 { margin-bottom: 10px; color: var(--primary); font-size: 1.1rem; }
+.trade-box i { color: var(--accent); margin-right: 10px; }
+.trade-box p { font-size: 0.9rem; color: var(--text-gray); }
+    </style>
+</head>
+
+<body>
+
+<header id="navbar">
+    <a href="#" class="logo">
+        <img src="logo.png" alt="Vishnu Balaji">
+        <h1>Vishnu Balaji Global</h1>
+    </a>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <video autoplay muted loop playsinline>
+        <source src="hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h2 class="reveal">Bridging Continents via Indian Excellence</h2>
+        <p class="reveal">Premium Agri-Commodities & Industrial Goods</p>
+        <a href="#products" class="btn-main reveal">Our Export Catalog</a>
+    </div>
+</section>
+
+<section id="about">
+    <div class="reveal">
+        <h2 class="section-title">Global Trade With Divine Trust</h2>
+        <div style="max-width: 900px; margin: auto; text-align: left; background: #f8fafc; padding: 40px; border-radius: 15px; border-left: 5px solid var(--accent);">
+            <p style="font-size: 1.1rem; color: var(--primary); font-weight: 600; margin-bottom: 20px;">
+                Delivering Indian Excellence to the World Stage.
+            </p>
+            <p style="color: var(--text-gray); margin-bottom: 15px;">
+                At <strong>Vishnu Balaji Global Imports & Exports</strong>, we serve as a premier gateway for high-demand Indian commodities. We specialize in the strategic sourcing and global distribution of premium agricultural products, including Basmati Rice, G9 Cavendish Bananas, and pharma-grade Turmeric.
+            </p>
+            <p style="color: var(--text-gray); margin-bottom: 15px;">
+                Founded by <strong>Sandeep Solanke</strong>, our operations are built on the pillars of transparency and logistical precision. We manage the end-to-end supply chain, ensuring every shipment meets international quality benchmarks and arrives via optimized shipping routes.
+            </p>
+            <p style="color: var(--text-gray);">
+                With a growing network across 15+ countries, we are committed to being the most reliable partner in your supply chain, offering competitive pricing without compromising on the quality that India is world-renowned for.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="products" style="background: #f8fafc;">
+    <h2 class="section-title reveal">Global High-Demand Products</h2>
+    <div class="grid-container">
+        
+        <div class="product-card reveal">
+            <div class="product-tag">Quota 2026 Ready</div>
+            <img src="images/wheat.jpg" alt="Wheat">
+            <div class="product-info">
+                <h3>Premium Wheat</h3>
+                <p>Grade-A Milling & Durum Wheat.</p>
+            </div>
+        </div>
+
+        <div class="product-card reveal">
+            <div class="product-tag">Fresh Export</div>
+            <img src="images/bananas.jpg" alt="Bananas">
+            <div class="product-info">
+                <h3>Cavendish Bananas</h3>
+                <p>G9 variety, world-class grading.</p>
+            </div>
+        </div>
+
+        <div class="product-card reveal">
+            <div class="product-tag">Aromatic</div>
+            <img src="images/basmati.jpg" alt="Rice">
+            <div class="product-info">
+                <h3>1121 Basmati Rice</h3>
+                <p>XXL Long grain, aged for 2 years.</p>
+            </div>
+        </div>
+
+<div class="product-card reveal">
+            <div class="product-tag">Aromatic</div>
+            <img src="images/nonbasmati.jpg" alt="Rice">
+            <div class="product-info">
+                <h3>1121 Non Basmati Rice</h3>
+                <p>Small grain, aged for 1 years.</p>
+            </div>
+        </div>
+
+<div class="product-card reveal">
+            <div class="product-tag">Fresh Direct from Farm</div>
+            <img src="images/onions.jpg" alt="Rice">
+            <div class="product-info">
+                <h3>1121 Maharashtra Onions</h3>
+                <p>FRESH.</p>
+            </div>
+        </div>
+
+
+        <div class="product-card reveal">
+            <div class="product-tag">Curcumin 5%+</div>
+            <img src="images/turmeric.jpg" alt="Turmeric">
+            <div class="product-info">
+                <h3>Pure Turmeric</h3>
+                <p>Fingers and high-grade powder.</p>
+            </div>
+        </div>
+
+        <div class="product-card reveal">
+            <div class="product-tag">Non-GMO</div>
+            <img src="images/pulses.jpg" alt="Pulses">
+            <div class="product-info">
+                <h3>Pulses & Grains</h3>
+                <p>Chickpeas, Lentils, and Green Mung.</p>
+            </div>
+        </div>
+
+        <div class="product-card reveal">
+            <div class="product-tag">Teja S17</div>
+            <img src="images/chilli.jpg" alt="Chilli">
+            <div class="product-info">
+                <h3>Dry Red Chilli</h3>
+                <p>Stemless, sun-dried, fiery red.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stats-grid">
+        <div class="reveal">
+            <h3 class="counter" data-target="25">0</h3>
+            <p>Global Buyers</p>
+        </div>
+        <div class="reveal">
+            <h3 class="counter" data-target="15">0</h3>
+            <p>Countries Served</p>
+        </div>
+        <div class="reveal">
+            <h3 class="counter" data-target="1000">0</h3>
+            <p>Successful Shipments</p>
+        </div>
+        <div class="reveal">
+            <h3 class="counter" data-target="5">0</h3>
+            <p>Years of Legacy</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2 class="section-title reveal">Partner With Us</h2>
+    <div class="contact-wrapper">
+        <div class="contact-info reveal">
+            <h3>Headquarters</h3>
+            <p><i class="fas fa-user-tie"></i> <strong>Founder:</strong> Sandeep Solanke</p>
+            <p><i class="fas fa-phone"></i> +91 91606 66483</p>
+            <p><i class="fas fa-envelope"></i> depu.sep13@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Exporting from India to Global Ports</p>
+        </div>
+
+        <form class="contact-form reveal" action="https://formsubmit.co/depu.sep13@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Import Inquiry!">
+            
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Business Email" required>
+            <textarea name="message" rows="5" placeholder="List products and quantity required..." required></textarea>
+            <button type="submit">Submit Inquiry</button>
+        </form>
+    </div>
+</section>
+<section id="trade-trust" style="background: #f1f5f9; padding: 60px 8%;">
+    <div class="reveal">
+        <h3 style="margin-bottom: 40px; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Compliance & Quality</h3>
+        
+        <div class="cert-grid">
+            <div class="cert-item"><img src="https://upload.wikimedia.org/wikipedia/en/2/26/FSSAI_logo.png" alt="FSSAI"></div>
+            <div class="cert-item"><img src="https://apeda.gov.in/apedaweb/images/apeda_logo.png" alt="APEDA"></div>
+            <div class="cert-item">ISO 9001:2015</div>
+            <div class="cert-item">IEC CERTIFIED</div>
+        </div>
+    </div>
+
+    <div class="trade-info-grid reveal" style="margin-top: 50px;">
+        <div class="trade-box">
+            <h4><i class="fas fa-file-invoice-dollar"></i> Accepted Payments</h4>
+            <p>Letter of Credit (L/C), T/T (Bank Transfer), CAD.</p>
+        </div>
+        <div class="trade-box">
+            <h4><i class="fas fa-truck-loading"></i> Shipping Terms</h4>
+            <p>FOB, CIF, CFR, and CNF (Worldwide Delivery).</p>
+        </div>
+        <div class="trade-box">
+            <h4><i class="fas fa-check-double"></i> Inspection</h4>
+            <p>SGS / Intertek Quality Inspection support.</p>
+        </div>
+    </div>
+</section>
+<footer style="background:#051630; color:rgba(255,255,255,0.6); padding:40px; text-align:center; border-top: 1px solid #1a2b45;">
+    <p>&copy; 2026 Vishnu Balaji Global Imports & Exports. All Rights Reserved.</p>
+</footer>
+
+<a href="https://wa.me/9160666483" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+    // NAVBAR COLOR CHANGE ON SCROLL
+    window.onscroll = function() {
+        const nav = document.getElementById('navbar');
+        if (window.pageYOffset > 50) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    };
+
+    // REVEAL ANIMATIONS
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Run once on load
+
+    // COUNTER ANIMATION (PRO)
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const runCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    };
+
+    // Trigger counters only when they appear
+    const statsSection = document.querySelector('.stats');
+    const options = { threshold: 0.5 };
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                runCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, options);
+    statsObserver.observe(statsSection);
+</script>
+
+</body>
+</html>
