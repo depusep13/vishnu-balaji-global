@@ -299,20 +299,41 @@ border:none;
 
 /* WHATSAPP */
 
-.whatsapp{
+/* WHATSAPP BUTTON - PREMIUM STYLE */
+
+.whatsapp-btn{
 position:fixed;
 bottom:25px;
 right:25px;
-background:#25D366;
-width:60px;
-height:60px;
-border-radius:50%;
 display:flex;
 align-items:center;
-justify-content:center;
+gap:10px;
+background:#25D366;
 color:white;
-font-size:28px;
+padding:12px 18px;
+border-radius:50px;
+font-weight:600;
 text-decoration:none;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+z-index:1000;
+animation:pulse 1.5s infinite;
+}
+
+.whatsapp-btn img{
+width:28px;
+height:28px;
+}
+
+.whatsapp-btn span{
+font-size:14px;
+}
+
+/* PULSE ANIMATION */
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
 }
 
 @media(max-width:768px){
@@ -388,6 +409,7 @@ width:100%;
 </head>
 <a href="https://wa.me/919160666483" class="whatsapp-btn" target="_blank">
 <img src="images/whatsapp.png" alt="WhatsApp">
+<span>Chat with us</span>
 </a>
 <body>
 
