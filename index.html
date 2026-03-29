@@ -10,49 +10,9 @@
 
 <meta name="keywords" content="Basmati Rice Exporter India, Wheat Exporter India, Turmeric Exporter India, Banana Exporter India, Indian Spices Exporter">
 
-<!-- COMPANY SCHEMA -->
-
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Organization",
- "name": "Vishnu Balaji Global Imports & Exports",
- "url": "https://vishnubalajiglobal.com",
- "logo": "https://vishnubalajiglobal.com/images/logo.png",
- "contactPoint": {
-   "@type": "ContactPoint",
-   "telephone": "+91-9160666483",
-   "contactType": "sales",
-   "areaServed": "Worldwide",
-   "availableLanguage": ["English"]
- }
-}
-</script>
-
-<!-- PRODUCT SCHEMA -->
-
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Product",
- "name": "1121 Basmati Rice Exporter India",
- "description": "Premium 1121 Basmati Rice exporter from India supplying global buyers.",
- "brand": {
-   "@type": "Brand",
-   "name": "Vishnu Balaji Global"
- },
- "offers": {
-   "@type": "Offer",
-   "priceCurrency": "USD",
-   "availability": "https://schema.org/InStock"
- }
-}
-</script>
-
-</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
 :root{
 --primary:#051630;
 --accent:#d4af37;
@@ -66,35 +26,6 @@ body{
 font-family:'Plus Jakarta Sans',sans-serif;
 color:var(--primary);
 line-height:1.6;
-}
-.whatsapp-btn {
-position: fixed;
-bottom: 25px;
-right: 25px;
-background: #25D366;
-color: white;
-padding: 14px 20px;
-border-radius: 50px;
-display: flex;
-align-items: center;
-gap: 12px;
-font-weight: bold;
-font-size: 16px;
-text-decoration: none;
-box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-z-index: 999;
-transition: 0.3s;
-}
-
-/* HOVER EFFECT */
-.whatsapp-btn:hover {
-transform: scale(1.1);
-}
-
-/* ICON SIZE (MAIN FIX) */
-.whatsapp-btn img {
-width: 36px;
-height: 36px;
 }
 
 /* NAVBAR */
@@ -142,6 +73,35 @@ font-weight:600;
 
 nav a:hover{
 color:var(--accent);
+}
+
+/* MOBILE MENU */
+
+.menu-toggle{
+display:none;
+font-size:28px;
+color:white;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+nav{
+position:absolute;
+top:70px;
+right:0;
+background:#051630;
+width:200px;
+flex-direction:column;
+display:none;
+}
+nav a{
+display:block;
+padding:15px;
+margin:0;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+nav.active{display:flex;}
+.menu-toggle{display:block;}
 }
 
 /* HERO */
@@ -215,8 +175,6 @@ margin-bottom:40px;
 }
 
 /* PRODUCTS */
-
-/* PRODUCT SECTION */
 
 .products-grid{
 display:grid;
@@ -301,10 +259,12 @@ gap:40px;
 }
 
 .contact-form input,
-.contact-form textarea{
+.contact-form textarea,
+.contact-form select{
 padding:15px;
 border:1px solid #ccc;
 width:100%;
+border-radius:5px;
 }
 
 .contact-form button{
@@ -315,8 +275,6 @@ border:none;
 }
 
 /* WHATSAPP */
-
-/* WHATSAPP BUTTON - PREMIUM STYLE */
 
 .whatsapp-btn{
 position:fixed;
@@ -333,7 +291,6 @@ font-weight:600;
 text-decoration:none;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 z-index:1000;
-animation:pulse 1.5s infinite;
 }
 
 .whatsapp-btn img{
@@ -341,107 +298,18 @@ width:28px;
 height:28px;
 }
 
-.whatsapp-btn span{
-font-size:14px;
-}
-
-/* PULSE ANIMATION */
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-@media(max-width:768px){
-.whatsapp-btn span{
-display:none;
-}
-.whatsapp-btn{
-padding:12px;
-}
-}
-@media(max-width:768px){
-nav{display:none;}
-.contact-wrapper{grid-template-columns:1fr;}
-}
-
-.menu-toggle{
-display:none;
-font-size:28px;
-color:white;
-cursor:pointer;
-}
-
-@media(max-width:768px){
-
-nav{
-position:absolute;
-top:70px;
-right:0;
-background:#051630;
-width:200px;
-flex-direction:column;
-display:none;
-}
-
-nav a{
-display:block;
-padding:15px;
-margin:0;
-border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-.menu-toggle{
-display:block;
-}
-
-nav.active{
-display:flex;
-}
-
-.contact-form select{
-padding:15px;
-border:1px solid #ccc;
-border-radius:5px;
-width:100%;
-}
-
 </style>
 
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Organization",
- "name": "Vishnu Balaji Global Imports & Exports",
- "url": "https://vishnubalajiglobal.com",
- "logo": "https://vishnubalajiglobal.com/images/logo.png",
- "contactPoint": {
-   "@type": "ContactPoint",
-   "telephone": "+91-9160666483",
-   "contactType": "sales",
-   "areaServed": "Worldwide",
-   "availableLanguage": ["English"]
- },
- "sameAs": [
-   "https://wa.me/919160666483"
- ],
- "address": {
-   "@type": "PostalAddress",
-   "addressCountry": "India"
- }
-}
-</script>
 </head>
 
+<body>
+
+<!-- WHATSAPP BUTTON -->
 <a href="https://api.whatsapp.com/send?phone=919160666483&text=Hello%20I%20am%20interested%20in%20your%20products" 
 class="whatsapp-btn" target="_blank">
-
-<img src="images/whatsapp.png" alt="WhatsApp">
+<img src="images/whatsapp.png">
 <span>Chat with us</span>
-
 </a>
-
-<body>
 
 <header id="navbar">
 
@@ -572,43 +440,12 @@ Vishnu Balaji Global Imports & Exports is a trusted Indian trading company expor
 <!-- STATS -->
 
 <section class="stats">
-
 <div class="stats-grid">
-
-<div>
-<h3>25+</h3>
-<p>Domestic Buyers</p>
+<div><h3>25+</h3><p>Domestic Buyers</p></div>
+<div><h3>2+</h3><p>Countries Served</p></div>
+<div><h3>1000+</h3><p>Shipments</p></div>
+<div><h3>15+</h3><p>Years Experience</p></div>
 </div>
-
-<div>
-<h3>2+</h3>
-<p>Countries Served</p>
-</div>
-
-<div>
-<h3>1000+</h3>
-<p>Shipments</p>
-</div>
-
-<div>
-<h3>15+</h3>
-<p>Years Experience</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="global">
-
-<h2 class="section-title">Global Export Network</h2>
-
-<p style="max-width:700px;margin:auto;margin-bottom:40px;color:#64748b;">
-We export premium agricultural products from India to buyers worldwide through trusted logistics partners.
-</p>
-
-<img src="images/worldmap.png" style="width:100%;max-width:900px;border-radius:10px;">
-
 </section>
 
 <!-- CONTACT -->
@@ -626,32 +463,20 @@ We export premium agricultural products from India to buyers worldwide through t
 <p>🌍 Exporting Worldwide</p>
 </div>
 
-<form id="inquiryForm" class="contact-form" action="https://formsubmit.co/depu.sep13@gmail.com" method="POST">
-
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_subject" value="New Export Inquiry">
+<form id="inquiryForm" class="contact-form">
 
 <input type="text" name="name" placeholder="Full Name" required>
-
 <input type="email" name="email" placeholder="Business Email" required>
 
-<input type="text" name="company" placeholder="Company Name">
-
 <select name="product" required>
-<option value="">Select Product</option>
+<option>Select Product</option>
 <option>Basmati Rice</option>
-<option>Non Basmati Rice</option>
 <option>Wheat</option>
 <option>Bananas</option>
-<option>Onions</option>
-<option>Turmeric</option>
-<option>Pulses</option>
-<option>Dry Red Chilli</option>
 </select>
 
-<input type="text" name="quantity" placeholder="Required Quantity (Example: 20 Tons)">
-
-<textarea name="message" rows="4" placeholder="Additional Details"></textarea>
+<input type="text" name="quantity" placeholder="Quantity">
+<textarea name="message" placeholder="Details"></textarea>
 
 <button type="submit">Send Inquiry</button>
 
@@ -662,49 +487,41 @@ We export premium agricultural products from India to buyers worldwide through t
 </section>
 
 <footer style="background:#051630;color:white;text-align:center;padding:30px">
-
 © 2026 Vishnu Balaji Global Imports & Exports
-
 </footer>
-
-<a href="https://api.whatsapp.com/send?phone=919160666483&text=Hello%20I%20am%20interested%20in%20your%20products">
-<i class="fab fa-whatsapp"></i>
-</a>
 
 <script>
 
-window.onscroll=function(){
-
-const nav=document.getElementById("navbar");
-
+// NAVBAR SCROLL
+window.addEventListener("scroll", function(){
+const navbar=document.getElementById("navbar");
 if(window.scrollY>50){
-nav.classList.add("scrolled");
+navbar.classList.add("scrolled");
 }else{
-nav.classList.remove("scrolled");
+navbar.classList.remove("scrolled");
 }
+});
 
+// MOBILE MENU
 const toggle=document.querySelector(".menu-toggle");
 const nav=document.querySelector("nav");
 
 toggle.onclick=function(){
 nav.classList.toggle("active");
-}
-
-document.getElementById("inquiryForm").addEventListener("submit", function(){
-
-let name=document.querySelector('input[name="name"]').value;
-let product=document.querySelector('select[name="product"]').value;
-let qty=document.querySelector('input[name="quantity"]').value;
-
-let message="Hello I am "+name+" I want to inquire about "+product+" Quantity: "+qty;
-
-let url="https://wa.me/919160666483?text="+encodeURIComponent(message);
-
-window.open(url,"_blank");
-
-});
-
 };
+
+// FORM TO WHATSAPP
+document.getElementById("inquiryForm").addEventListener("submit", function(e){
+e.preventDefault();
+
+let name=document.querySelector('[name="name"]').value;
+let product=document.querySelector('[name="product"]').value;
+let qty=document.querySelector('[name="quantity"]').value;
+
+let message=`Hello I am ${name}. I want ${product}. Quantity: ${qty}`;
+
+window.open("https://wa.me/919160666483?text="+encodeURIComponent(message));
+});
 
 </script>
 
