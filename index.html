@@ -11,6 +11,9 @@
 <meta name="keywords" content="Basmati Rice Exporter India, Wheat Exporter India, Turmeric Exporter India, Banana Exporter India, Indian Spices Exporter">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -138,6 +141,7 @@ background:rgba(5,22,48,0.7);
 .hero-content{
 position:relative;
 max-width:800px;
+padding:0 20px;
 }
 
 .hero h2{
@@ -160,6 +164,12 @@ text-decoration:none;
 font-weight:bold;
 margin:5px;
 display:inline-block;
+border-radius:6px;
+transition:0.3s;
+}
+
+.btn-main:hover{
+transform:translateY(-2px);
 }
 
 /* SECTIONS */
@@ -256,6 +266,7 @@ color:#d4af37;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:40px;
+align-items:start;
 }
 
 .contact-form input,
@@ -265,6 +276,14 @@ padding:15px;
 border:1px solid #ccc;
 width:100%;
 border-radius:5px;
+margin-bottom:12px;
+font-family:'Plus Jakarta Sans',sans-serif;
+font-size:15px;
+}
+
+.contact-form textarea{
+min-height:120px;
+resize:vertical;
 }
 
 .contact-form button{
@@ -272,6 +291,14 @@ padding:15px;
 background:#051630;
 color:white;
 border:none;
+border-radius:5px;
+cursor:pointer;
+font-weight:600;
+width:100%;
+}
+
+.contact-form button:hover{
+opacity:0.95;
 }
 
 /* WHATSAPP */
@@ -298,6 +325,26 @@ width:28px;
 height:28px;
 }
 
+@media(max-width:768px){
+.hero h2{
+font-size:36px;
+}
+.hero p{
+font-size:16px;
+}
+.section-title{
+font-size:28px;
+}
+.contact-wrapper{
+grid-template-columns:1fr;
+}
+.whatsapp-btn{
+padding:12px 14px;
+}
+.whatsapp-btn span{
+display:none;
+}
+}
 </style>
 
 </head>
@@ -306,15 +353,15 @@ height:28px;
 
 <!-- WHATSAPP BUTTON -->
 <a href="https://api.whatsapp.com/send?phone=919160666483&text=Hello%20I%20am%20interested%20in%20your%20products" 
-class="whatsapp-btn" target="_blank">
-<img src="images/whatsapp.png">
+class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+<img src="images/whatsapp.png" alt="WhatsApp">
 <span>Chat with us</span>
 </a>
 
 <header id="navbar">
 
 <a href="#home" class="logo">
-<img src="images/logo.png">
+<img src="images/logo.png" alt="Vishnu Balaji Global Logo">
 <h1>Vishnu Balaji Global</h1>
 </a>
 
@@ -335,7 +382,7 @@ class="whatsapp-btn" target="_blank">
 
 <section id="home" class="hero">
 
-<video autoplay muted loop>
+<video autoplay muted loop playsinline>
 <source src="hero.mp4" type="video/mp4">
 </video>
 
@@ -349,7 +396,7 @@ class="whatsapp-btn" target="_blank">
 
 <a href="#products" class="btn-main">Our Products</a>
 <a href="#contact" class="btn-main">Request Quotation</a>
-<a href="catalogue.pdf" class="btn-main" target="_blank">Download Catalogue</a>
+<a href="catalogue.pdf" class="btn-main" target="_blank" rel="noopener noreferrer">Download Catalogue</a>
 
 </div>
 
@@ -378,59 +425,59 @@ Vishnu Balaji Global Imports & Exports is a trusted Indian trading company expor
 <div class="products-grid">
 
 <div class="product-card">
-<img src="images/wheat.jpg">
+<img src="images/wheat.jpg" alt="Premium Wheat">
 <h3>Premium Wheat</h3>
 <p>Grade-A Milling & Durum Wheat.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Premium%20Wheat" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Premium%20Wheat" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/bananas.jpg">
+<img src="images/bananas.jpg" alt="Cavendish Bananas">
 <h3>Cavendish Bananas</h3>
 <p>Fresh G9 export quality bananas.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Bananas" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Bananas" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/basmati.jpg">
+<img src="images/basmati.jpg" alt="1121 Basmati Rice">
 <h3>1121 Basmati Rice</h3>
 <p>XXL long grain aged basmati rice.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Basmati%20Rice" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Basmati%20Rice" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/nonbasmati.jpg">
+<img src="images/nonbasmati.jpg" alt="Non-Basmati Rice">
 <h3>Non-Basmati Rice</h3>
 <p>Premium export quality rice.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Non%20Basmati%20Rice" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Non%20Basmati%20Rice" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/onions.jpg">
+<img src="images/onions.jpg" alt="Maharashtra Onions">
 <h3>Maharashtra Onions</h3>
 <p>Fresh export quality onions.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Onions" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Onions" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/turmeric.jpg">
+<img src="images/turmeric.jpg" alt="Pure Turmeric">
 <h3>Pure Turmeric</h3>
 <p>High curcumin turmeric fingers & powder.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Turmeric" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Turmeric" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/pulses.jpg">
+<img src="images/pulses.jpg" alt="Pulses and Grains">
 <h3>Pulses & Grains</h3>
 <p>Chickpeas, lentils & mung beans.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Pulses" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Pulses" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 <div class="product-card">
-<img src="images/chilli.jpg">
+<img src="images/chilli.jpg" alt="Dry Red Chilli">
 <h3>Dry Red Chilli</h3>
 <p>Teja S17 sun-dried chilli.</p>
-<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Dry%20Red%20Chilli" target="_blank" class="ask-btn">Ask Price</a>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Dry%20Red%20Chilli" target="_blank" rel="noopener noreferrer" class="ask-btn">Ask Price</a>
 </div>
 
 </div>
@@ -463,16 +510,31 @@ Vishnu Balaji Global Imports & Exports is a trusted Indian trading company expor
 <p>🌍 Exporting Worldwide</p>
 </div>
 
-<form id="inquiryForm" class="contact-form">
+<form
+id="inquiryForm"
+class="contact-form"
+action="https://formsubmit.co/depu.sep13@gmail.com"
+method="POST"
+target="hidden_iframe"
+>
+
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="New Export Inquiry - Vishnu Balaji Global Imports & Exports">
+<input type="hidden" name="_template" value="table">
 
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="email" name="email" placeholder="Business Email" required>
 
 <select name="product" required>
-<option>Select Product</option>
-<option>Basmati Rice</option>
-<option>Wheat</option>
-<option>Bananas</option>
+<option value="">Select Product</option>
+<option>1121 Basmati Rice</option>
+<option>Non-Basmati Rice</option>
+<option>Premium Wheat</option>
+<option>Cavendish Bananas</option>
+<option>Maharashtra Onions</option>
+<option>Pure Turmeric</option>
+<option>Pulses & Grains</option>
+<option>Dry Red Chilli</option>
 </select>
 
 <input type="text" name="quantity" placeholder="Quantity">
@@ -481,6 +543,8 @@ Vishnu Balaji Global Imports & Exports is a trusted Indian trading company expor
 <button type="submit">Send Inquiry</button>
 
 </form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
@@ -510,17 +574,22 @@ toggle.onclick=function(){
 nav.classList.toggle("active");
 };
 
-// FORM TO WHATSAPP
-document.getElementById("inquiryForm").addEventListener("submit", function(e){
-e.preventDefault();
+// FORM TO EMAIL + WHATSAPP
+document.getElementById("inquiryForm").addEventListener("submit", function(){
 
 let name=document.querySelector('[name="name"]').value;
+let email=document.querySelector('[name="email"]').value;
 let product=document.querySelector('[name="product"]').value;
 let qty=document.querySelector('[name="quantity"]').value;
+let details=document.querySelector('[name="message"]').value;
 
-let message=`Hello I am ${name}. I want ${product}. Quantity: ${qty}`;
+let message=`Hello, I am ${name}.
+Business Email: ${email}
+Product: ${product}
+Quantity: ${qty}
+Details: ${details}`;
 
-window.open("https://wa.me/919160666483?text="+encodeURIComponent(message));
+window.open("https://wa.me/919160666483?text="+encodeURIComponent(message), "_blank");
 });
 
 </script>
