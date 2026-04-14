@@ -1012,7 +1012,7 @@ Keep your buyer-facing files ready here so inquiries can move faster.
 
 <h2 class="section-title">Contact Us</h2>
 <p class="section-subtitle">
-Send your requirement once and receive both email capture and direct WhatsApp inquiry flow.
+Send your requirement once and receive both CRM lead capture and direct WhatsApp inquiry flow.
 </p>
 
 <div class="contact-wrapper">
@@ -1023,13 +1023,13 @@ Send your requirement once and receive both email capture and direct WhatsApp in
 <p>📧 depu.sep13@gmail.com</p>
 <p>🌍 Exporting Worldwide</p>
 <p><strong>Business Type:</strong> Export / Import / Trade Supply</p>
-<p><strong>Response Mode:</strong> Email + WhatsApp</p>
+<p><strong>Response Mode:</strong> CRM + WhatsApp</p>
 
 <div class="test-box">
 <h4>Business Contact Details</h4>
 <ul>
 <li>Fast response for export inquiries</li>
-<li>Email and WhatsApp support available</li>
+<li>WhatsApp support available</li>
 <li>Quotation support for bulk orders</li>
 <li>Product and packaging details shared on request</li>
 <li>Worldwide buyer communication support</li>
@@ -1037,17 +1037,7 @@ Send your requirement once and receive both email capture and direct WhatsApp in
 </div>
 </div>
 
-<form
-id="inquiryForm"
-class="contact-form"
-action="https://formsubmit.co/depu.sep13@gmail.com"
-method="POST"
-target="hidden_iframe"
->
-
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_subject" value="New Export Inquiry - Vishnu Balaji Global Imports & Exports">
-<input type="hidden" name="_template" value="table">
+<form id="inquiryForm" class="contact-form">
 
 <div class="form-grid">
   <input type="text" name="name" placeholder="Full Name" required>
@@ -1090,12 +1080,10 @@ target="hidden_iframe"
 
 <textarea name="message" placeholder="Requirement Details"></textarea>
 
-<button type="submit">Send Inquiry</button>
-<p class="form-note">This form sends your inquiry to email and also opens WhatsApp with the same details.</p>
+<button type="submit" id="submitBtn">Send Inquiry</button>
+<p class="form-note" id="formStatus">This form saves inquiry into CRM and also opens WhatsApp after success.</p>
 
 </form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
@@ -1107,11 +1095,11 @@ target="hidden_iframe"
 
 <script>
 // NAVBAR SCROLL
-window.addEventListener("scroll", function(){
+window.addEventListener("scroll", function () {
   const navbar = document.getElementById("navbar");
-  if(window.scrollY > 50){
+  if (window.scrollY > 50) {
     navbar.classList.add("scrolled");
-  }else{
+  } else {
     navbar.classList.remove("scrolled");
   }
 });
@@ -1120,40 +1108,83 @@ window.addEventListener("scroll", function(){
 const toggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("nav");
 
-toggle.onclick = function(){
+toggle.onclick = function () {
   nav.classList.toggle("active");
 };
 
 // CLOSE MOBILE MENU AFTER CLICK
-document.querySelectorAll("nav a").forEach(function(link){
-  link.addEventListener("click", function(){
+document.querySelectorAll("nav a").forEach(function (link) {
+  link.addEventListener("click", function () {
     nav.classList.remove("active");
   });
 });
 
-// FORM TO EMAIL + WHATSAPP
-document.getElementById("inquiryForm").addEventListener("submit", function(){
-  let name = document.querySelector('[name="name"]').value;
-  let company = document.querySelector('[name="company"]').value;
-  let email = document.querySelector('[name="email"]').value;
-  let country = document.querySelector('[name="country"]').value;
-  let product = document.querySelector('[name="product"]').value;
-  let qty = document.querySelector('[name="quantity"]').value;
-  let unit = document.querySelector('[name="unit"]').value;
-  let destinationPort = document.querySelector('[name="destination_port"]').value;
-  let details = document.querySelector('[name="message"]').value;
+// SAVE FORM TO CRM + OPEN WHATSAPP
+const inquiryForm = document.getElementById("inquiryForm");
+const submitBtn = document.getElementById("submitBtn");
+const formStatus = document.getElementById("formStatus");
 
-  let message = `Hello, I am ${name}.
-Company: ${company}
-Business Email: ${email}
-Country: ${country}
-Product: ${product}
-Quantity: ${qty}
-Unit: ${unit}
-Preferred Destination Port: ${destinationPort}
-Details: ${details}`;
+inquiryForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-  window.open("https://wa.me/919160666483?text=" + encodeURIComponent(message), "_blank");
+  const formData = new FormData(inquiryForm);
+
+  const payload = {
+    name: formData.get("name")?.toString().trim() || "",
+    company: formData.get("company")?.toString().trim() || "",
+    email: formData.get("email")?.toString().trim() || "",
+    country: formData.get("country")?.toString().trim() || "",
+    product: formData.get("product")?.toString().trim() || "",
+    quantity: formData.get("quantity")?.toString().trim() || "",
+    unit: formData.get("unit")?.toString().trim() || "",
+    destination_port: formData.get("destination_port")?.toString().trim() || "",
+    message: formData.get("message")?.toString().trim() || "",
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
+  formStatus.textContent = "Saving your inquiry...";
+
+  try {
+    const response = await fetch("/api/inquiry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || "Failed to save inquiry.");
+    }
+
+    formStatus.textContent = "Inquiry saved successfully.";
+
+    const whatsappMessage = `Hello, I am ${payload.name}.
+Company: ${payload.company}
+Business Email: ${payload.email}
+Country: ${payload.country}
+Product: ${payload.product}
+Quantity: ${payload.quantity}
+Unit: ${payload.unit}
+Preferred Destination Port: ${payload.destination_port}
+Details: ${payload.message}`;
+
+    inquiryForm.reset();
+
+    window.open(
+      "https://wa.me/919160666483?text=" + encodeURIComponent(whatsappMessage),
+      "_blank"
+    );
+  } catch (error) {
+    console.error(error);
+    formStatus.textContent = error.message || "Something went wrong while sending inquiry.";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Send Inquiry";
+  }
 });
 </script>
 
