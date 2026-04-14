@@ -15,12 +15,12 @@
 <meta property="og:description" content="Trusted Indian exporter of rice, wheat, bananas, turmeric, onions, pulses and spices for global buyers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vishnubalajiglobal.com">
-<meta property="og:image" content="https://vishnubalajiglobal.com/images/logo.png">
+<meta property="og:image" content="https://vishnubalajiglobal.com/logo.png">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vishnu Balaji Global Imports & Exports">
 <meta name="twitter:description" content="Premium agricultural export products from India for global buyers.">
-<meta name="twitter:image" content="https://vishnubalajiglobal.com/images/logo.png">
+<meta name="twitter:image" content="https://vishnubalajiglobal.com/logo.png">
 
 <link rel="canonical" href="https://vishnubalajiglobal.com">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -34,7 +34,7 @@
   "@type":"Organization",
   "name":"Vishnu Balaji Global Imports & Exports",
   "url":"https://vishnubalajiglobal.com",
-  "logo":"https://vishnubalajiglobal.com/images/logo.png",
+  "logo":"https://vishnubalajiglobal.com/logo.png",
   "email":"mailto:depu.sep13@gmail.com",
   "telephone":"+91-9160666483",
   "founder":"Sandeep Solanke",
@@ -82,6 +82,7 @@
 --light-bg:#f8fafc;
 --dark:#0b1a35;
 --border:#e2e8f0;
+--wa:#25D366;
 }
 
 *{
@@ -114,13 +115,13 @@ text-decoration:none;
 header{
 position:fixed;
 width:100%;
-padding:20px 6%;
+padding:18px 6%;
 display:flex;
 justify-content:space-between;
 align-items:center;
 z-index:1000;
-background:rgba(5,22,48,0.85);
-backdrop-filter:blur(6px);
+background:rgba(5,22,48,0.88);
+backdrop-filter:blur(8px);
 transition:0.3s;
 }
 
@@ -132,25 +133,23 @@ box-shadow:0 8px 24px rgba(0,0,0,0.12);
 .logo{
 display:flex;
 align-items:center;
+gap:12px;
 color:white;
 text-decoration:none;
 }
-  .logo{
-display:flex;
-align-items:center;
-gap:10px;
-}
 
 .logo img{
-height:65px;   /* increase size */
-margin-right:12px;
+height:64px;
+width:auto;
 object-fit:contain;
+flex-shrink:0;
 }
 
 .logo h1{
 font-size:18px;
 font-weight:700;
-letter-spacing:1px;
+letter-spacing:0.8px;
+line-height:1.2;
 }
 
 nav{
@@ -316,16 +315,19 @@ background:#fff;
 border:1px solid var(--border);
 border-radius:12px;
 padding:18px;
+box-shadow:0 8px 20px rgba(0,0,0,0.04);
 }
 
 .meta-box h4{
 margin-bottom:8px;
 font-size:16px;
+color:var(--primary);
 }
 
 .meta-box p{
 font-size:14px;
 color:var(--text-gray);
+line-height:1.7;
 }
 
 /* PRODUCTS */
@@ -583,23 +585,47 @@ font-size:14px;
 /* WHATSAPP */
 .whatsapp-btn{
 position:fixed;
-bottom:25px;
-right:25px;
+right:24px;
+bottom:24px;
+width:58px;
+height:58px;
+border-radius:50%;
+background:linear-gradient(135deg, #25D366, #1ebe5d);
+color:#ffffff;
 display:flex;
 align-items:center;
-gap:10px;
-background:#25D366;
-color:white;
-padding:12px 18px;
-border-radius:50px;
-font-weight:600;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+justify-content:center;
+font-size:30px;
+box-shadow:0 14px 30px rgba(0,0,0,0.22);
 z-index:1000;
+transition:transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.whatsapp-btn img{
-width:28px;
-height:28px;
+.whatsapp-btn:hover{
+transform:translateY(-3px) scale(1.04);
+box-shadow:0 18px 34px rgba(0,0,0,0.28);
+}
+
+.whatsapp-btn::after{
+content:"WhatsApp";
+position:absolute;
+right:70px;
+top:50%;
+transform:translateY(-50%);
+background:#051630;
+color:#fff;
+font-size:13px;
+font-weight:600;
+padding:8px 12px;
+border-radius:999px;
+white-space:nowrap;
+opacity:0;
+pointer-events:none;
+transition:0.25s;
+}
+
+.whatsapp-btn:hover::after{
+opacity:1;
 }
 
 /* FOOTER */
@@ -620,7 +646,7 @@ grid-template-columns:1fr;
 @media(max-width:768px){
 nav{
 position:absolute;
-top:70px;
+top:78px;
 right:0;
 background:#051630;
 width:220px;
@@ -655,15 +681,22 @@ font-size:28px;
 .form-grid{
 grid-template-columns:1fr;
 }
-.whatsapp-btn{
-padding:12px 14px;
-}
-.whatsapp-btn span{
-display:none;
+.logo img{
+height:52px;
 }
 .logo h1{
 font-size:13px;
-letter-spacing:1px;
+letter-spacing:0.5px;
+}
+.whatsapp-btn{
+width:54px;
+height:54px;
+right:18px;
+bottom:18px;
+font-size:28px;
+}
+.whatsapp-btn::after{
+display:none;
 }
 }
 </style>
@@ -673,15 +706,14 @@ letter-spacing:1px;
 <body>
 
 <a href="https://api.whatsapp.com/send?phone=919160666483&text=Hello%20I%20am%20interested%20in%20your%20products"
-class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
-<img src="images/whatsapp.png" alt="WhatsApp">
-<span>Chat with us</span>
+class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+<i class="fab fa-whatsapp"></i>
 </a>
 
 <header id="navbar">
 
 <a href="#home" class="logo">
-<img src="images/logo.png" alt="Vishnu Balaji Global Logo">
+<img src="logo.png" alt="Vishnu Balaji Global Logo">
 <h1>Vishnu Balaji Global</h1>
 </a>
 
@@ -768,32 +800,32 @@ We aim to give international buyers confidence through quality control, export d
 <div class="trust-meta">
   <div class="meta-box">
     <h4>Certifications / Registrations</h4>
-    <p>Add your real IEC, GST, APEDA, FSSAI, ISO or other registration details here.</p>
+    <p>IEC registered export business with GST registration and export documentation support for international shipments.</p>
   </div>
 
   <div class="meta-box">
     <h4>Payment Terms</h4>
-    <p>L/C, T/T, CAD or as mutually agreed with buyer. Replace this line with your exact accepted terms.</p>
+    <p>We work on T/T, L/C and other mutually agreed payment terms depending on order quantity, product type and buyer profile.</p>
   </div>
 
   <div class="meta-box">
     <h4>Shipping Terms</h4>
-    <p>FOB, CIF, CFR, CNF or destination-based terms as per transaction. Update this with your exact offer terms.</p>
+    <p>Shipment terms can be offered on FOB, CIF, CFR and other mutually agreed international trade terms based on destination and order requirements.</p>
   </div>
 
   <div class="meta-box">
     <h4>Packaging Options</h4>
-    <p>Retail packs, bulk bags, PP bags, corrugated boxes or buyer-specific private label packaging options.</p>
+    <p>We support bulk packing, PP bags, corrugated boxes, retail packs and buyer-specific packaging requirements for export orders.</p>
   </div>
 
   <div class="meta-box">
     <h4>Countries Served</h4>
-    <p>Update with your real served markets such as UAE, Saudi Arabia, Bangladesh, Sri Lanka, Africa, Europe or others.</p>
+    <p>We serve international buyers across Asia, the Middle East, Africa and other global markets based on product availability and shipment requirements.</p>
   </div>
 
   <div class="meta-box">
     <h4>Inspection Support</h4>
-    <p>Third-party inspection support can be mentioned here, such as SGS, Intertek or buyer-nominated inspection agency.</p>
+    <p>Third-party inspection support can be arranged as per buyer requirement before shipment dispatch.</p>
   </div>
 </div>
 
@@ -883,8 +915,8 @@ Instead of making separate pages immediately, this section gives you a strong pr
 <li>Available in white / steam / sela variants</li>
 <li>Long grain export quality</li>
 <li>Retail and bulk packaging possible</li>
-<li>MOQ: update as per your supply capacity</li>
-<li>Best for distributors, wholesalers and importers</li>
+<li>MOQ available as per supply capacity</li>
+<li>Suitable for distributors, wholesalers and importers</li>
 </ul>
 </div>
 
@@ -893,7 +925,7 @@ Instead of making separate pages immediately, this section gives you a strong pr
 <ul>
 <li>Milling and durum grades can be offered</li>
 <li>Bulk packing and container shipment support</li>
-<li>Moisture and quality specs to be shared on request</li>
+<li>Moisture and quality specifications shared on request</li>
 <li>Suitable for trade buyers and industrial use</li>
 <li>Buyer-specific contract terms possible</li>
 </ul>
@@ -904,8 +936,8 @@ Instead of making separate pages immediately, this section gives you a strong pr
 <ul>
 <li>Fresh export quality G9 bananas</li>
 <li>Grading, carton packing and loading support</li>
-<li>Cold-chain and transit planning required</li>
-<li>Preferred destination and shelf-life to be discussed</li>
+<li>Cold-chain and transit planning support</li>
+<li>Preferred destination and shelf-life discussed on inquiry</li>
 <li>Suitable for fruit importers and distributors</li>
 </ul>
 </div>
@@ -916,8 +948,8 @@ Instead of making separate pages immediately, this section gives you a strong pr
 <li>Multiple grades and varieties available</li>
 <li>Whole and processed options can be discussed</li>
 <li>Private label and bulk packs possible</li>
-<li>Spice and grocery import channel suitable</li>
-<li>COA / sample / quote can be shared on inquiry</li>
+<li>Suitable for spice and grocery import channels</li>
+<li>COA, sample and quote can be shared on inquiry</li>
 </ul>
 </div>
 
@@ -938,7 +970,7 @@ Instead of making separate pages immediately, this section gives you a strong pr
 
 <h2 class="section-title">Business Assets & Download Area</h2>
 <p class="section-subtitle">
-Keep your buyer-facing files ready here so inquiries can move faster. Replace placeholder links with your real files.
+Keep your buyer-facing files ready here so inquiries can move faster.
 </p>
 
 <div class="assets-grid">
@@ -951,20 +983,20 @@ Keep your buyer-facing files ready here so inquiries can move faster. Replace pl
 
 <div class="asset-card">
 <h3>Product Specification Sheet</h3>
-<p>Use this for technical specifications, grades, sizes and packaging details.</p>
-<a href="#" class="asset-link">Add File</a>
+<p>Technical specifications, grades, sizes and packaging details can be shared on request.</p>
+<a href="#contact" class="asset-link">Request Details</a>
 </div>
 
 <div class="asset-card">
 <h3>Certificates Folder</h3>
-<p>Add IEC, GST, APEDA, FSSAI, ISO, test reports or compliance documents here.</p>
-<a href="#" class="asset-link">Add File</a>
+<p>Registration details, compliance documents and supporting export papers can be provided during business discussions.</p>
+<a href="#contact" class="asset-link">Request Details</a>
 </div>
 
 <div class="asset-card">
 <h3>Packaging Photos</h3>
-<p>Show cartons, bags, labels, palletization and loading photos to buyers.</p>
-<a href="#" class="asset-link">Add File</a>
+<p>Product packing, export bags, cartons and loading photos can be shared with interested buyers.</p>
+<a href="#contact" class="asset-link">Request Details</a>
 </div>
 
 </div>
