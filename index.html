@@ -12,9 +12,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- GOOGLE FONT -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
 --primary:#051630;
@@ -32,6 +29,7 @@ line-height:1.6;
 }
 
 /* NAVBAR */
+
 header{
 position:fixed;
 width:100%;
@@ -44,11 +42,27 @@ background:rgba(5,22,48,0.85);
 backdrop-filter:blur(6px);
 }
 
-header.scrolled{background:#051630;}
+header.scrolled{
+background:#051630;
+}
 
-.logo{display:flex;align-items:center;color:white;text-decoration:none;}
-.logo img{height:45px;margin-right:10px;}
-.logo h1{font-size:16px;letter-spacing:2px;text-transform:uppercase;}
+.logo{
+display:flex;
+align-items:center;
+color:white;
+text-decoration:none;
+}
+
+.logo img{
+height:45px;
+margin-right:10px;
+}
+
+.logo h1{
+font-size:16px;
+letter-spacing:2px;
+text-transform:uppercase;
+}
 
 nav a{
 color:white;
@@ -57,10 +71,18 @@ text-decoration:none;
 font-weight:600;
 }
 
-nav a:hover{color:var(--accent);}
+nav a:hover{
+color:var(--accent);
+}
 
-/* MOBILE */
-.menu-toggle{display:none;font-size:28px;color:white;cursor:pointer;}
+/* MOBILE MENU */
+
+.menu-toggle{
+display:none;
+font-size:28px;
+color:white;
+cursor:pointer;
+}
 
 @media(max-width:768px){
 nav{
@@ -83,6 +105,7 @@ nav.active{display:flex;}
 }
 
 /* HERO */
+
 .hero{
 height:100vh;
 display:flex;
@@ -95,6 +118,8 @@ position:relative;
 
 .hero video{
 position:absolute;
+top:0;
+left:0;
 width:100%;
 height:100%;
 object-fit:cover;
@@ -103,15 +128,29 @@ z-index:-1;
 
 .hero-overlay{
 position:absolute;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:rgba(5,22,48,0.7);
 }
 
-.hero-content{position:relative;max-width:800px;}
+.hero-content{
+position:relative;
+max-width:800px;
+}
 
-.hero h2{font-size:55px;margin-bottom:20px;}
-.hero p{font-size:20px;margin-bottom:30px;}
+.hero h2{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+}
+
+/* BUTTON */
 
 .btn-main{
 padding:15px 35px;
@@ -123,21 +162,32 @@ margin:5px;
 display:inline-block;
 }
 
-/* SECTION */
-section{padding:100px 8%;text-align:center;}
-.section-title{font-size:36px;margin-bottom:40px;}
+/* SECTIONS */
+
+section{
+padding:100px 8%;
+text-align:center;
+}
+
+.section-title{
+font-size:36px;
+margin-bottom:40px;
+}
 
 /* PRODUCTS */
+
 .products-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:30px;
+margin-top:40px;
 }
 
 .product-card{
 background:white;
 padding:20px;
 border-radius:10px;
+text-align:center;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 transition:0.3s;
 }
@@ -155,25 +205,53 @@ border-radius:8px;
 margin-bottom:15px;
 }
 
+.product-card h3{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.product-card p{
+font-size:14px;
+color:#64748b;
+margin-bottom:15px;
+}
+
 .ask-btn{
+display:inline-block;
 padding:10px 20px;
 background:#d4af37;
 color:#051630;
+font-weight:700;
 text-decoration:none;
 border-radius:5px;
-display:inline-block;
+transition:0.3s;
+}
+
+.ask-btn:hover{
+background:#051630;
+color:white;
 }
 
 /* STATS */
-.stats{background:#051630;color:white;}
+
+.stats{
+background:#051630;
+color:white;
+}
+
 .stats-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:30px;
 }
-.stats h3{font-size:50px;color:#d4af37;}
+
+.stats h3{
+font-size:50px;
+color:#d4af37;
+}
 
 /* CONTACT */
+
 .contact-wrapper{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -187,7 +265,6 @@ padding:15px;
 border:1px solid #ccc;
 width:100%;
 border-radius:5px;
-margin-bottom:10px;
 }
 
 .contact-form button{
@@ -195,10 +272,10 @@ padding:15px;
 background:#051630;
 color:white;
 border:none;
-cursor:pointer;
 }
 
 /* WHATSAPP */
+
 .whatsapp-btn{
 position:fixed;
 bottom:25px;
@@ -210,10 +287,17 @@ background:#25D366;
 color:white;
 padding:12px 18px;
 border-radius:50px;
+font-weight:600;
 text-decoration:none;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+z-index:1000;
 }
 
-.whatsapp-btn img{width:28px;height:28px;}
+.whatsapp-btn img{
+width:28px;
+height:28px;
+}
+
 </style>
 
 </head>
@@ -221,7 +305,8 @@ text-decoration:none;
 <body>
 
 <!-- WHATSAPP BUTTON -->
-<a href="https://wa.me/919160666483" class="whatsapp-btn" target="_blank">
+<a href="https://api.whatsapp.com/send?phone=919160666483&text=Hello%20I%20am%20interested%20in%20your%20products" 
+class="whatsapp-btn" target="_blank">
 <img src="images/whatsapp.png">
 <span>Chat with us</span>
 </a>
@@ -233,7 +318,9 @@ text-decoration:none;
 <h1>Vishnu Balaji Global</h1>
 </a>
 
-<div class="menu-toggle"><i class="fas fa-bars"></i></div>
+<div class="menu-toggle">
+<i class="fas fa-bars"></i>
+</div>
 
 <nav>
 <a href="#home">Home</a>
@@ -245,6 +332,7 @@ text-decoration:none;
 </header>
 
 <!-- HERO -->
+
 <section id="home" class="hero">
 
 <video autoplay muted loop>
@@ -254,43 +342,114 @@ text-decoration:none;
 <div class="hero-overlay"></div>
 
 <div class="hero-content">
+
 <h2>Bridging Continents via Indian Excellence</h2>
+
 <p>Premium Agricultural & Industrial Export Products</p>
 
 <a href="#products" class="btn-main">Our Products</a>
 <a href="#contact" class="btn-main">Request Quotation</a>
 <a href="catalogue.pdf" class="btn-main" target="_blank">Download Catalogue</a>
+
 </div>
 
 </section>
 
 <!-- ABOUT -->
+
 <section id="about">
+
 <h2 class="section-title">About Vishnu Balaji Global</h2>
+
 <p style="max-width:800px;margin:auto;color:#64748b">
-We export premium agricultural products worldwide including rice, wheat, spices and fresh produce.
+
+Vishnu Balaji Global Imports & Exports is a trusted Indian trading company exporting high quality agricultural commodities worldwide including rice, wheat, spices, pulses and fresh produce.
+
 </p>
+
 </section>
 
 <!-- PRODUCTS -->
+
 <section id="products" style="background:#f8fafc">
+
 <h2 class="section-title">Export Products</h2>
 
 <div class="products-grid">
 
-<div class="product-card"><img src="images/wheat.jpg"><h3>Premium Wheat</h3></div>
-<div class="product-card"><img src="images/bananas.jpg"><h3>Bananas</h3></div>
-<div class="product-card"><img src="images/basmati.jpg"><h3>Basmati Rice</h3></div>
-<div class="product-card"><img src="images/nonbasmati.jpg"><h3>Non-Basmati Rice</h3></div>
-<div class="product-card"><img src="images/onions.jpg"><h3>Onions</h3></div>
-<div class="product-card"><img src="images/turmeric.jpg"><h3>Turmeric</h3></div>
-<div class="product-card"><img src="images/pulses.jpg"><h3>Pulses</h3></div>
-<div class="product-card"><img src="images/chilli.jpg"><h3>Dry Red Chilli</h3></div>
+<div class="product-card">
+<img src="images/wheat.jpg">
+<h3>Premium Wheat</h3>
+<p>Grade-A Milling & Durum Wheat.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Premium%20Wheat" target="_blank" class="ask-btn">Ask Price</a>
+</div>
 
+<div class="product-card">
+<img src="images/bananas.jpg">
+<h3>Cavendish Bananas</h3>
+<p>Fresh G9 export quality bananas.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Bananas" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+<div class="product-card">
+<img src="images/basmati.jpg">
+<h3>1121 Basmati Rice</h3>
+<p>XXL long grain aged basmati rice.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Basmati%20Rice" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+<div class="product-card">
+<img src="images/nonbasmati.jpg">
+<h3>Non-Basmati Rice</h3>
+<p>Premium export quality rice.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Non%20Basmati%20Rice" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+<div class="product-card">
+<img src="images/onions.jpg">
+<h3>Maharashtra Onions</h3>
+<p>Fresh export quality onions.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Onions" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+<div class="product-card">
+<img src="images/turmeric.jpg">
+<h3>Pure Turmeric</h3>
+<p>High curcumin turmeric fingers & powder.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Turmeric" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+<div class="product-card">
+<img src="images/pulses.jpg">
+<h3>Pulses & Grains</h3>
+<p>Chickpeas, lentils & mung beans.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Pulses" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+<div class="product-card">
+<img src="images/chilli.jpg">
+<h3>Dry Red Chilli</h3>
+<p>Teja S17 sun-dried chilli.</p>
+<a href="https://wa.me/919160666483?text=Hello%20I%20want%20price%20for%20Dry%20Red%20Chilli" target="_blank" class="ask-btn">Ask Price</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+<div class="stats-grid">
+<div><h3>25+</h3><p>Domestic Buyers</p></div>
+<div><h3>2+</h3><p>Countries Served</p></div>
+<div><h3>1000+</h3><p>Shipments</p></div>
+<div><h3>15+</h3><p>Years Experience</p></div>
 </div>
 </section>
 
 <!-- CONTACT -->
+
 <section id="contact">
 
 <h2 class="section-title">Contact Us</h2>
@@ -301,25 +460,19 @@ We export premium agricultural products worldwide including rice, wheat, spices 
 <p><strong>Founder:</strong> Sandeep Solanke</p>
 <p>📞 +91 9160666483</p>
 <p>📧 depu.sep13@gmail.com</p>
+<p>🌍 Exporting Worldwide</p>
 </div>
 
-<form id="inquiryForm" class="contact-form"
-action="https://formsubmit.co/depu.sep13@gmail.com"
-method="POST"
-target="hidden_iframe">
-
-<input type="hidden" name="_captcha" value="false">
+<form id="inquiryForm" class="contact-form">
 
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="email" name="email" placeholder="Business Email" required>
 
 <select name="product" required>
-<option value="">Select Product</option>
+<option>Select Product</option>
 <option>Basmati Rice</option>
 <option>Wheat</option>
 <option>Bananas</option>
-<option>Turmeric</option>
-<option>Onions</option>
 </select>
 
 <input type="text" name="quantity" placeholder="Quantity">
@@ -328,8 +481,6 @@ target="hidden_iframe">
 <button type="submit">Send Inquiry</button>
 
 </form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 </div>
 
@@ -341,7 +492,7 @@ target="hidden_iframe">
 
 <script>
 
-// NAVBAR
+// NAVBAR SCROLL
 window.addEventListener("scroll", function(){
 const navbar=document.getElementById("navbar");
 if(window.scrollY>50){
@@ -352,27 +503,24 @@ navbar.classList.remove("scrolled");
 });
 
 // MOBILE MENU
-document.querySelector(".menu-toggle").onclick=function(){
-document.querySelector("nav").classList.toggle("active");
+const toggle=document.querySelector(".menu-toggle");
+const nav=document.querySelector("nav");
+
+toggle.onclick=function(){
+nav.classList.toggle("active");
 };
 
-// FORM WHATSAPP + EMAIL
-document.getElementById("inquiryForm").addEventListener("submit", function(){
+// FORM TO WHATSAPP
+document.getElementById("inquiryForm").addEventListener("submit", function(e){
+e.preventDefault();
 
 let name=document.querySelector('[name="name"]').value;
-let email=document.querySelector('[name="email"]').value;
 let product=document.querySelector('[name="product"]').value;
 let qty=document.querySelector('[name="quantity"]').value;
-let msg=document.querySelector('[name="message"]').value;
 
-let text=`Hello, I am ${name}
-Email: ${email}
-Product: ${product}
-Quantity: ${qty}
-Details: ${msg}`;
+let message=`Hello I am ${name}. I want ${product}. Quantity: ${qty}`;
 
-window.open("https://wa.me/919160666483?text="+encodeURIComponent(text));
-
+window.open("https://wa.me/919160666483?text="+encodeURIComponent(message));
 });
 
 </script>
