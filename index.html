@@ -3555,6 +3555,35 @@ Requested Catalog: https://www.vishnubalajiglobal.com/catalogue.pdf
       document.getElementById("successWhatsAppBtn").href = whatsappUrl;
       document.getElementById("successEmailBtn").href = emailMailto;
 
+      // Background email forwarding via FormSubmit API
+      const mailFormData = new FormData();
+      mailFormData.append("Name", payload.name);
+      mailFormData.append("Company", payload.company || "Not Specified");
+      mailFormData.append("Email", payload.email);
+      mailFormData.append("Country", payload.country);
+      mailFormData.append("Product", payload.product);
+      mailFormData.append("Quantity", `${payload.quantity || "Not Specified"} ${payload.unit}`);
+      mailFormData.append("Destination Port", payload.destination_port || "FOB Origin Port");
+      mailFormData.append("Requirement Details", payload.message || "Requesting catalog specification validation.");
+      mailFormData.append("_subject", `New Import RFQ - ${payload.name} [${payload.product}]`);
+      mailFormData.append("_captcha", "false");
+
+      fetch("https://formsubmit.co/ajax/depu.sep13@gmail.com", {
+        method: "POST",
+        body: mailFormData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Background email sent via FormSubmit:", data);
+        showToast("Inquiry dispatched directly to email inbox!", "success");
+      })
+      .catch(err => {
+        console.error("FormSubmit background dispatch failed:", err);
+      });
+
       const triggerRedirects = () => {
         showToast("RFQ generated! Redirecting...", "success");
         setTimeout(() => {
