@@ -1,0 +1,3373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vishnu Balaji Global | Letterhead Composer</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #051630;
+      --primary-light: #0d274c;
+      --primary-dark: #020b18;
+      --accent: #d4af37;
+      --accent-hover: #f3cf58;
+      --accent-light: #fdf6e2;
+      --white: #ffffff;
+      --text-dark: #0f172a;
+      --text-gray: #64748b;
+      --bg-gray: #cbd5e1;
+      --border: #cbd5e1;
+      --editor-bg: #091a33;
+      --editor-input: #122849;
+      --editor-border: rgba(255, 255, 255, 0.1);
+      
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background-color: var(--bg-gray);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    /* SPLIT CONTAINER */
+    .app-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* LEFT EDITOR PANEL */
+    .editor-panel {
+      width: 460px;
+      min-width: 460px;
+      background-color: var(--editor-bg);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+    }
+
+    .editor-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--editor-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .editor-header h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .editor-header h1 i {
+      color: var(--accent);
+    }
+
+    .back-btn {
+      color: var(--text-gray);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-btn:hover {
+      color: var(--accent-hover);
+    }
+
+    .editor-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .editor-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .editor-body::-webkit-scrollbar-track {
+      background: var(--editor-bg);
+    }
+    .editor-body::-webkit-scrollbar-thumb {
+      background: var(--editor-input);
+      border-radius: 3px;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--editor-border);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-gray);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background-color: var(--editor-input);
+      border: 1px solid var(--editor-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+      line-height: 1.5;
+    }
+
+    /* STYLE CHOOSER BUTTONS */
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .style-btn {
+      background-color: var(--editor-input);
+      border: 1px solid var(--editor-border);
+      border-radius: 8px;
+      padding: 12px 10px;
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .style-btn i {
+      font-size: 1.2rem;
+      color: var(--text-gray);
+      transition: color 0.3s;
+    }
+
+    .style-btn:hover {
+      border-color: rgba(212, 175, 55, 0.5);
+    }
+
+    .style-btn.active {
+      background-color: rgba(212, 175, 55, 0.08);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .style-btn.active i {
+      color: var(--accent);
+    }
+
+    .editor-footer {
+      padding: 24px;
+      border-top: 1px solid var(--editor-border);
+      background-color: var(--primary-dark);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--primary-dark);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--editor-border);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-danger {
+      background-color: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #ef4444;
+    }
+
+    .btn-danger:hover {
+      background-color: rgba(239, 68, 68, 0.05);
+      border-color: #ef4444;
+    }
+
+    /* RIGHT PREVIEW CANVAS */
+    .preview-canvas {
+      flex: 1;
+      height: 100%;
+      overflow-y: auto;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Prevent stretching and allow A4 sheet to expand dynamically */
+      background-color: var(--bg-gray);
+    }
+
+    .a4-paper {
+      width: 210mm;
+      min-height: 297mm;
+      height: auto;
+      background-color: var(--white);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.07);
+      padding: 22mm 18mm 22mm 18mm;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: var(--primary);
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    /* ========================================================
+       TEMPLATE STYLE 1: CLASSIC EXECUTIVE
+       ======================================================== */
+    .a4-paper.style-classic {
+      border-top: 4px solid var(--primary);
+    }
+
+    .a4-paper.style-classic .letter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 16px;
+      border-bottom: 3px double var(--primary);
+      margin-bottom: 25px;
+    }
+
+    .a4-paper.style-classic .header-left img {
+      height: 125px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .a4-paper.style-classic .header-right {
+      text-align: right;
+    }
+
+    .a4-paper.style-classic .company-title {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+    
+    .a4-paper.style-classic .company-title span {
+      color: var(--accent);
+    }
+
+    .a4-paper.style-classic .company-subtitle {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .a4-paper.style-classic .header-contact {
+      font-size: 0.72rem;
+      color: var(--text-gray);
+      line-height: 1.4;
+    }
+
+    .a4-paper.style-classic .header-contact p {
+      margin-bottom: 2px;
+    }
+
+    .a4-paper.style-classic .letter-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--accent);
+      padding-top: 10px;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-gray);
+    }
+    
+    .a4-paper.style-classic .footer-slogan {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* ========================================================
+       TEMPLATE STYLE 2: MODERN LEFT-BORDER
+       ======================================================== */
+    .a4-paper.style-modern {
+      padding-left: 26mm; /* Extra padding on left for stripe */
+    }
+
+    .a4-paper.style-modern::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 10mm;
+      background-color: var(--primary);
+    }
+
+    .a4-paper.style-modern::after {
+      content: '';
+      position: absolute;
+      left: 10mm;
+      top: 0;
+      bottom: 0;
+      width: 2.5mm;
+      background-color: var(--accent);
+    }
+
+    .a4-paper.style-modern .letter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    .a4-paper.style-modern .header-left img {
+      height: 120px;
+      width: auto;
+    }
+
+    .a4-paper.style-modern .header-right {
+      text-align: right;
+    }
+
+    .a4-paper.style-modern .company-title {
+      font-family: var(--font-sans);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    .a4-paper.style-modern .company-title span {
+      color: var(--accent);
+    }
+
+    .a4-paper.style-modern .company-subtitle {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .a4-paper.style-modern .header-contact {
+      display: none; /* Hide header details in modern, handled in footer */
+    }
+
+    .a4-paper.style-modern .letter-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--text-gray);
+    }
+
+    .a4-paper.style-modern .footer-left {
+      text-align: left;
+    }
+
+    .a4-paper.style-modern .footer-right {
+      text-align: right;
+    }
+
+    .a4-paper.style-modern .footer-bold {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    /* ========================================================
+       TEMPLATE STYLE 3: CENTERED MINIMALIST
+       ======================================================== */
+    .a4-paper.style-minimal {
+      border-top: 6px solid var(--accent);
+    }
+
+    .a4-paper.style-minimal .letter-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .a4-paper.style-minimal .header-left img {
+      height: 120px;
+      width: auto;
+      margin-bottom: 10px;
+    }
+
+    .a4-paper.style-minimal .company-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .a4-paper.style-minimal .company-title span {
+      color: var(--accent);
+    }
+
+    .a4-paper.style-minimal .company-subtitle {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .a4-paper.style-minimal .header-contact {
+      display: none;
+    }
+
+    .a4-paper.style-minimal .letter-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      font-size: 0.68rem;
+      color: var(--text-gray);
+      text-align: center;
+    }
+
+    .a4-paper.style-minimal .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .a4-paper.style-minimal .footer-col i {
+      color: var(--accent);
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+    }
+
+    /* ========================================================
+       TEMPLATE STYLE 4: NAVY ACCENT HEADER
+       ======================================================== */
+    .a4-paper.style-navy {
+      padding-top: 0; /* Let navy header sit at the absolute top */
+      overflow: hidden;
+    }
+
+    .a4-paper.style-navy .letter-header {
+      background-color: var(--primary);
+      margin-left: -18mm;
+      margin-right: -18mm;
+      padding: 15px 18mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .a4-paper.style-navy .header-left img {
+      height: 105px;
+    }
+
+    .a4-paper.style-navy .header-right {
+      text-align: right;
+    }
+
+    .a4-paper.style-navy .company-title {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .a4-paper.style-navy .company-title span {
+      color: var(--accent);
+    }
+
+    .a4-paper.style-navy .company-subtitle {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .a4-paper.style-navy .header-contact {
+      display: none;
+    }
+
+    .a4-paper.style-navy .letter-footer {
+      margin-top: auto;
+      border-top: 2px solid var(--primary);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--text-dark);
+    }
+
+    .a4-paper.style-navy .footer-left {
+      font-weight: 600;
+    }
+    
+    .a4-paper.style-navy .footer-right {
+      color: var(--text-gray);
+      text-align: right;
+    }
+
+    /* ========================================================
+       COMMON LETTER CONTENT STYLING
+       ======================================================== */
+    .letter-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+
+    .meta-date {
+      margin-left: auto; /* Always align date to the right even if Ref is empty */
+    }
+
+    .meta-ref span, .meta-date span {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .letter-recipient {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      color: var(--text-dark);
+    }
+
+    .recipient-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .letter-subject {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .letter-salutation {
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .letter-body {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #334155;
+      flex: 1; /* Body content occupies remaining vertical space */
+    }
+
+    .letter-body p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .letter-signatory {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      page-break-inside: avoid;
+    }
+
+    .sign-valediction {
+      margin-bottom: 40px; /* Space for physical signature */
+    }
+
+    .sign-name {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .sign-title {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+      font-weight: 500;
+    }
+
+    /* WATERMARK LOGO */
+    .watermark {
+      position: absolute;
+      top: 148.5mm;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url('logo.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    /* Empty mode hiding letter components */
+    .a4-paper.empty-mode .letter-meta,
+    .a4-paper.empty-mode .letter-recipient,
+    .a4-paper.empty-mode .letter-subject,
+    .a4-paper.empty-mode .letter-salutation,
+    .a4-paper.empty-mode .letter-body,
+    .a4-paper.empty-mode .letter-signatory {
+      display: none !important;
+    }
+
+    /* ========================================================
+       PRINT MEDIA CONFIGURATIONS
+       ======================================================== */
+    @media print {
+      @page {
+        size: A4;
+        margin: 20mm 0; /* Creates 20mm margins on top/bottom of every page, left/right is 0 to match A4 width */
+      }
+      @page :first {
+        margin-top: 0; /* Keeps the first page header banner flush with the top edge */
+      }
+      body, html {
+        background-color: var(--white) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .editor-panel {
+        display: none !important; /* Hide left editor */
+      }
+
+      .preview-canvas {
+        background-color: var(--white) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .a4-paper {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        height: auto !important;
+        min-height: 297mm !important;
+      }
+
+      /* Compensate margins specifically for browser prints */
+      .a4-paper.style-classic {
+        padding: 15mm 15mm 15mm 15mm !important;
+      }
+      .a4-paper.style-modern {
+        padding: 15mm 15mm 15mm 23mm !important;
+      }
+      .a4-paper.style-minimal {
+        padding: 15mm 15mm 15mm 15mm !important;
+      }
+      .a4-paper.style-navy {
+        padding: 0 15mm 15mm 15mm !important;
+      }
+      .a4-paper.style-navy .letter-header {
+        margin-left: -15mm !important;
+        margin-right: -15mm !important;
+        padding: 15px 15mm !important;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+    
+    /* Trade Document Studio Styles */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.8rem;
+    }
+    .doc-table th {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .doc-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border);
+      color: #334155;
+    }
+    .doc-table tr:nth-child(even) td {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+    .doc-table-totals {
+      width: 100%;
+      font-size: 0.8rem;
+      border-collapse: collapse;
+    }
+    .doc-table-totals td {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table-totals tr.grand-total td {
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 2px double var(--primary);
+      font-size: 0.88rem;
+    }
+    .item-row-card, .package-row-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .item-row-card:hover, .package-row-card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT EDITOR PANEL -->
+    <div class="editor-panel">
+      <div class="editor-header">
+        <h1><i class="fa-solid fa-file-invoice"></i> Letterhead Composer</h1>
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Website</a>
+      </div>
+      
+      <div class="editor-body">
+        
+        <!-- Document Type Selector -->
+        <div class="section-title"><i class="fa-solid fa-file-contract"></i> Document Type</div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <select id="inputDocType" onchange="handleDocTypeChange()" style="font-weight: 700; border-color: var(--accent); background-color: var(--primary-light);">
+            <option value="letterhead">📄 Official Letterhead</option>
+            <option value="proforma">🧮 Proforma Invoice</option>
+            <option value="commercial">🚢 Commercial Invoice</option>
+            <option value="packing">📦 Packing List</option>
+            <option value="po">🤝 Purchase Order</option>
+            <option value="origin">🪪 Certificate of Origin</option>
+            <option value="phyto">🌱 Phytosanitary Certificate</option>
+            <option value="sgs">🔬 SGS Quality Certificate</option>
+            <option value="shippingbill">📝 Customs Shipping Bill</option>
+            <option value="leo">👮 Customs LEO Approval</option>
+            <option value="lading">🚢 Bill of Lading</option>
+            <option value="ebrc">🏦 Bank e-BRC Certificate</option>
+          </select>
+        </div>
+
+        <!-- Style selection -->
+        <div class="section-title"><i class="fa-solid fa-palette"></i> Letterhead Template</div>
+        <div class="style-grid">
+          <button class="style-btn active" id="btn-style-classic" onclick="changeStyle('style-classic')">
+            <i class="fa-solid fa-building-columns"></i>
+            Classic Executive
+          </button>
+          <button class="style-btn" id="btn-style-modern" onclick="changeStyle('style-modern')">
+            <i class="fa-solid fa-border-left"></i>
+            Modern Border
+          </button>
+          <button class="style-btn" id="btn-style-minimal" onclick="changeStyle('style-minimal')">
+            <i class="fa-solid fa-feather"></i>
+            Centered Minimal
+          </button>
+          <button class="style-btn" id="btn-style-navy" onclick="changeStyle('style-navy')">
+            <i class="fa-solid fa-heading"></i>
+            Navy Banner
+          </button>
+        </div>
+
+        <!-- Branding & Header Details -->
+        <div class="section-title"><i class="fa-solid fa-building"></i> Branding & Header</div>
+        
+        <div class="form-group">
+          <label for="inputLogo">Logo Image</label>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="file" id="inputLogo" accept="image/*" onchange="handleLogoUpload(this)" style="display: none;">
+            <button class="btn btn-secondary" onclick="document.getElementById('inputLogo').click()" style="margin: 0; padding: 10px 14px; font-size: 0.85rem; width: auto; flex: 1; min-height: 40px;">
+              <i class="fa-solid fa-upload"></i> Upload Logo
+            </button>
+            <button class="btn btn-danger" id="btnResetLogo" onclick="resetLogo()" style="margin: 0; padding: 10px 14px; font-size: 0.85rem; width: auto; display: none; min-height: 40px;">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputCompanyName">Company Name</label>
+            <input type="text" id="inputCompanyName" value="Vishnu Balaji Global" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputCompanySubtitle">Subtitle / Niche</label>
+            <input type="text" id="inputCompanySubtitle" value="Imports & Exports" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputTagline">Slogan / Tagline</label>
+          <input type="text" id="inputTagline" value="Direct Farm-to-Shipment Solutions" oninput="updateLivePreview()">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputPhone">Phone Number</label>
+            <input type="text" id="inputPhone" value="+91 91606 66483" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">Email Address</label>
+             <input type="text" id="inputEmail" value="sales@vishnubalajiglobal.com, depu.sep13@gmail.com" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputWebsite">Website URL</label>
+            <input type="text" id="inputWebsite" value="vishnubalajiglobal.com" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Office Address</label>
+            <input type="text" id="inputAddress" value="Hyderabad, Telangana, India" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <!-- Document Metadata -->
+        <div class="section-title"><i class="fa-solid fa-circle-info"></i> Document Info</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label id="labelRef" for="inputRef">Reference / Invoice No.</label>
+            <input type="text" id="inputRef" value="VBGE/2026/QT-1092" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputDate">Date</label>
+            <input type="text" id="inputDate" value="July 07, 2026" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <!-- Trade Metadata Group (Invoices, PO, Packing List) -->
+        <div id="metadata-trade-group" style="display: none;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputCurrency">Currency</label>
+              <select id="inputCurrency" onchange="updateLivePreview()">
+                <option value="USD">USD ($)</option>
+                <option value="INR">INR (₹)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label id="labelDueDate" for="inputDueDate">Valid Until / Due Date</label>
+              <input type="text" id="inputDueDate" value="August 07, 2026" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputIncoterms">Incoterms</label>
+              <input type="text" id="inputIncoterms" value="CIF (Cost, Insurance & Freight)" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputPaymentTerms">Payment Terms</label>
+              <input type="text" id="inputPaymentTerms" value="100% Irrevocable L/C at sight" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputOrigin">Sourcing Country</label>
+              <input type="text" id="inputOrigin" value="India" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputPortLoading">Port of Loading</label>
+              <input type="text" id="inputPortLoading" value="JNPT Port, Mumbai, India" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPortDischarge">Port of Discharge</label>
+            <input type="text" id="inputPortDischarge" value="Khalifa Port, Abu Dhabi, UAE" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <!-- Packing List specific Metadata -->
+        <div id="metadata-packing-group" style="display: none;">
+          <div class="form-group">
+            <label for="inputInvoiceRef">Associated Commercial Invoice Ref</label>
+            <input type="text" id="inputInvoiceRef" value="VBG/2026/INV-102" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputShippingMarks">Shipping Marks & Numbers</label>
+            <input type="text" id="inputShippingMarks" value="VBG / ABU DHABI / BAGS 1-2500" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <!-- General Cargo / Container shipping group -->
+        <div id="shipping-cargo-group" style="display: none;">
+          <div class="form-group">
+            <label for="inputContainerSeal">Container No & Seal No</label>
+            <input type="text" id="inputContainerSeal" value="MEDU8849102 / Seal: 482910" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+        <!-- Certificate of Origin Specific Metadata -->
+        <div id="metadata-coo-group" style="display: none;">
+          <div class="section-title"><i class="fa-solid fa-certificate"></i> Attestation Authority</div>
+          <div class="form-group">
+            <label for="inputCooAuthority">Chamber / Agency of Attestation</label>
+            <input type="text" id="inputCooAuthority" value="Indian Chamber of Commerce & Industry" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputCooGoodsDesc">Consignment Goods Description</label>
+            <textarea id="inputCooGoodsDesc" style="min-height: 60px;" oninput="updateLivePreview()">Super-Aged 1121 Indian Basmati Rice, protein content 8.5%, grain length 8.35mm+.</textarea>
+          </div>
+        </div>
+
+        <!-- Phytosanitary Specific Metadata -->
+        <div id="metadata-phyto-group" style="display: none;">
+          <div class="section-title"><i class="fa-solid fa-seedling"></i> Plant Treatment Details</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputPhytoBotanical">Botanical Name of Plant</label>
+              <input type="text" id="inputPhytoBotanical" value="Oryza sativa (Rice)" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputPhytoConsignment">Consignment Details</label>
+              <input type="text" id="inputPhytoConsignment" value="2500 PP Bags of Aged Basmati Rice" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputPhytoTreatment">Treatment Type</label>
+              <input type="text" id="inputPhytoTreatment" value="FUMIGATION" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputPhytoDate">Treatment Date</label>
+              <input type="text" id="inputPhytoDate" value="July 15, 2026" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputPhytoChemical">Active Chemical</label>
+              <input type="text" id="inputPhytoChemical" value="Methyl Bromide (CH3Br)" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputPhytoDosage">Dosage / Concentration</label>
+              <input type="text" id="inputPhytoDosage" value="32 g/m³" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputPhytoDuration">Duration & Temp</label>
+              <input type="text" id="inputPhytoDuration" value="24 Hours at 28°C" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputPhytoAuthority">Quarantine Authority</label>
+              <input type="text" id="inputPhytoAuthority" value="Directorate of Plant Protection, Quarantine & Storage, India" oninput="updateLivePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Recipient Information -->
+        <div class="section-title"><i class="fa-solid fa-user-tie"></i> Partner Details</div>
+        <div class="form-group">
+          <label id="labelRecipient" for="inputRecipient">Consignee / Buyer Details</label>
+          <textarea id="inputRecipient" style="min-height: 80px;" placeholder="Name, Company, Port, Address" oninput="updateLivePreview()">Mr. David Thompson
+Director of Procurement
+Global Agro Trading LLC
+142 Wall Street, New York, NY 10005, USA</textarea>
+        </div>
+
+        <!-- Letter Content (Letterhead Only) -->
+        <div id="content-letterhead-group">
+          <div class="section-title"><i class="fa-solid fa-pen-nib"></i> Letter Content</div>
+          <div class="form-group">
+            <label for="inputSubject">Subject Line</label>
+            <input type="text" id="inputSubject" value="OFFICIAL COMPLIANCE & COMMERCIAL QUOTATION - BASMATI & WHEAT SOURCING" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputSalutation">Salutation</label>
+            <input type="text" id="inputSalutation" value="Dear Mr. Thompson," oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputBody">Letter Body (Double newline starts a new paragraph)</label>
+            <textarea id="inputBody" oninput="updateLivePreview()">We thank you for your official RFQ dated July 2, 2026, and your interest in our premium agricultural commodities. We are pleased to submit our formal commercial quotation for the supply of Super-Aged 1121 Basmati Rice and Premium Grade-A Milling Wheat.</textarea>
+          </div>
+        </div>
+
+        <!-- Invoice / PO Line Items Table Editor -->
+        <div id="content-invoice-items-group" style="display: none;">
+          <div class="section-title"><i class="fa-solid fa-list"></i> Line Items</div>
+          <div id="invoice-items-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;">
+            <!-- Rendered dynamically -->
+          </div>
+          <button type="button" class="btn btn-secondary" onclick="addInvoiceItemRow()" style="font-size: 0.8rem; padding: 8px 12px; margin-bottom: 15px; width: auto; display: inline-flex;">
+            <i class="fa-solid fa-plus"></i> Add Line Item
+          </button>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputFreight">Freight Charges ($/₹)</label>
+              <input type="number" id="inputFreight" value="1200" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputInsurance">Insurance ($/₹)</label>
+              <input type="number" id="inputInsurance" value="350" oninput="updateLivePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Packing List Packages Editor -->
+        <div id="content-packing-items-group" style="display: none;">
+          <div class="section-title"><i class="fa-solid fa-boxes-stacked"></i> Packing details</div>
+          <div id="packing-items-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;">
+            <!-- Rendered dynamically -->
+          </div>
+          <button type="button" class="btn btn-secondary" onclick="addPackingItemRow()" style="font-size: 0.8rem; padding: 8px 12px; margin-bottom: 15px; width: auto; display: inline-flex;">
+            <i class="fa-solid fa-plus"></i> Add Packages Line
+          </button>
+        </div>
+
+        <!-- Bank Details Section (Invoice only) -->
+        <div id="content-bank-details-group" style="display: none;">
+          <div class="section-title"><i class="fa-solid fa-building-columns"></i> Bank details</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputBankName">Bank Name</label>
+              <input type="text" id="inputBankName" value="State Bank of India" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputBankAccountName">Account Name</label>
+              <input type="text" id="inputBankAccountName" value="Vishnu Balaji Global Exporters" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputBankAcNo">Account Number</label>
+              <input type="text" id="inputBankAcNo" value="40928410293" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputBankSwift">Swift Code</label>
+              <input type="text" id="inputBankSwift" value="SBININBB204" oninput="updateLivePreview()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputBankIfsc">IFSC Code</label>
+              <input type="text" id="inputBankIfsc" value="SBIN0001092" oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="inputBankBranch">Branch / AD Code</label>
+              <input type="text" id="inputBankBranch" value="Commercial AD Branch Hyderabad (AD Code: 0109284)" oninput="updateLivePreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Declaration Details (Invoice only) -->
+        <div id="content-declaration-group" style="display: none;">
+          <div class="section-title"><i class="fa-solid fa-file-shield"></i> Terms & Declarations</div>
+          <div class="form-group">
+            <label for="inputDeclaration">Invoice Declaration Statement</label>
+            <textarea id="inputDeclaration" style="min-height: 70px;" oninput="updateLivePreview()">We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.</textarea>
+          </div>
+        </div>
+
+        <!-- Signatory Details -->
+        <div class="section-title"><i class="fa-solid fa-signature"></i> Signatory</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputSignName">Signatory Name</label>
+            <input type="text" id="inputSignName" value="Sandeep Solanke" oninput="updateLivePreview()">
+          </div>
+          <div class="form-group">
+            <label for="inputSignTitle">Signatory Title</label>
+            <input type="text" id="inputSignTitle" value="Trade Director" oninput="updateLivePreview()">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Panel -->
+      <div class="editor-footer">
+        <!-- Blank Mode Toggle -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 6px; border: 1px solid var(--editor-border);">
+          <input type="checkbox" id="emptyModeToggle" onchange="toggleEmptyMode()" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent); margin: 0;">
+          <label for="emptyModeToggle" style="margin-bottom: 0; cursor: pointer; color: var(--white); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px;">Print Blank Letterhead</label>
+        </div>
+        <button class="btn btn-primary" onclick="printLetterhead()">
+          <i class="fa-solid fa-print"></i> Print / Save PDF
+        </button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-secondary" onclick="loadSampleContent()" style="flex: 1; font-size: 0.8rem; padding: 10px;">
+            <i class="fa-solid fa-rotate-left"></i> Load Sample
+          </button>
+          <button class="btn btn-danger" onclick="clearAllContent()" style="flex: 1; font-size: 0.8rem; padding: 10px;">
+            <i class="fa-solid fa-trash-can"></i> Clear Text
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PREVIEW CANVAS -->
+    <div class="preview-canvas">
+      
+      <!-- A4 PAPER SHIELD -->
+      <div class="a4-paper style-classic" id="a4Paper">
+        
+        <!-- Watermark -->
+        <div class="watermark"></div>
+        
+        <!-- Letter Header -->
+        <div class="letter-header">
+          <div class="header-left">
+            <img src="logo.png" alt="Vishnu Balaji Global Logo" id="prevLogo">
+          </div>
+          <div class="header-right">
+            <div class="company-title" id="prevCompanyTitle">Vishnu Balaji <span>Global</span></div>
+            <div class="company-subtitle" id="prevCompanySubtitle">Imports & Exports</div>
+            <div class="header-contact">
+              <p><i class="fa-solid fa-phone" style="font-size: 8px; color: var(--accent);"></i> <span id="prevHeaderPhone">+91 91606 66483</span></p>
+              <p><i class="fa-solid fa-envelope" style="font-size: 8px; color: var(--accent);"></i> <span id="prevHeaderEmail">sales@vishnubalajiglobal.com, depu.sep13@gmail.com</span></p>
+              <p><i class="fa-solid fa-globe" style="font-size: 8px; color: var(--accent);"></i> <span id="prevHeaderWeb">vishnubalajiglobal.com</span></p>
+              <p><i class="fa-solid fa-location-dot" style="font-size: 8px; color: var(--accent);"></i> <span id="prevHeaderAddress">Hyderabad, Telangana, India</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- LETTERHEAD PREVIEW SECTION -->
+        <div id="preview-section-letterhead">
+          <!-- Meta Details -->
+          <div class="letter-meta">
+            <div class="meta-ref">Ref: <span id="prevRef">VBGE/2026/QT-1092</span></div>
+            <div class="meta-date">Date: <span id="prevDate">July 07, 2026</span></div>
+          </div>
+
+          <!-- Recipient -->
+          <div class="letter-recipient">
+            <div class="recipient-to" style="font-weight: 500; font-size: 0.8rem; text-transform: uppercase; color: var(--text-gray); margin-bottom: 2px;">To,</div>
+            <div class="recipient-body" id="prevRecipient">
+              <strong>Mr. David Thompson</strong><br>
+              Director of Procurement<br>
+              Global Agro Trading LLC<br>
+              142 Wall Street, New York, NY 10005, USA
+            </div>
+          </div>
+
+          <!-- Subject -->
+          <div class="letter-subject" id="prevSubject">
+            OFFICIAL COMPLIANCE & COMMERCIAL QUOTATION - BASMATI & WHEAT SOURCING
+          </div>
+
+          <!-- Salutation -->
+          <div class="letter-salutation" id="prevSalutation">
+            Dear Mr. Thompson,
+          </div>
+
+          <!-- Body -->
+          <div class="letter-body" id="prevBody">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- Signatory -->
+          <div class="letter-signatory">
+            <div class="sign-valediction">Yours sincerely,</div>
+            <div class="sign-name" id="prevSignName">Sandeep Solanke</div>
+            <div class="sign-title" id="prevSignTitle">Trade Director</div>
+            <div style="font-size: 0.8rem; color: var(--text-gray); margin-top: 2px;" id="prevSignCompany">Vishnu Balaji Global Imports & Exports</div>
+          </div>
+        </div>
+
+        <!-- TRADE DOCUMENT PREVIEW SECTION (Proforma, Commercial, Purchase Order) -->
+        <div id="preview-section-trade" style="display: none; font-size: 0.82rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div id="trade-doc-title" style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; text-align: center; text-transform: uppercase; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 16px;">PROFORMA INVOICE</div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+              <h4 style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-gray); border-bottom: 1px solid var(--border); padding-bottom: 3px; margin-bottom: 5px;" id="trade-exporter-label">Exporter (Seller)</h4>
+              <div id="trade-exporter-val" style="font-size: 0.72rem; line-height: 1.3;">
+                <strong>Vishnu Balaji Global</strong><br>
+                Imports & Exports<br>
+                Hyderabad, Telangana, India
+              </div>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+              <h4 style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-gray); border-bottom: 1px solid var(--border); padding-bottom: 3px; margin-bottom: 5px;" id="trade-buyer-label">Consignee (Buyer)</h4>
+              <div id="trade-buyer-val" style="font-size: 0.72rem; line-height: 1.3;">
+                Mr. David Thompson<br>
+                Global Agro Trading LLC
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 15px; background: rgba(0,0,0,0.005); font-size: 0.7rem;">
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;" id="trade-doc-num-label">Invoice No:</span>
+              <strong id="trade-doc-num">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Date:</span>
+              <strong id="trade-doc-date">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;" id="trade-doc-due-label">Valid Until:</span>
+              <strong id="trade-doc-due">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Payment Terms:</span>
+              <span id="trade-doc-payment">-</span>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Incoterms:</span>
+              <span id="trade-doc-incoterms">-</span>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Origin Country:</span>
+              <span id="trade-doc-origin">India</span>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Port of Loading:</span>
+              <span id="trade-doc-loading">-</span>
+            </div>
+            <div style="grid-column: span 2;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Port of Discharge:</span>
+              <span id="trade-doc-discharge">-</span>
+            </div>
+          </div>
+
+          <table class="doc-table" id="trade-items-table">
+            <thead>
+              <tr>
+                <th style="width: 6%;">S.No</th>
+                <th style="width: 16%;">HS Code</th>
+                <th style="width: 44%;">Description of Goods</th>
+                <th style="text-align: right; width: 10%;">Qty</th>
+                <th style="text-align: right; width: 11%;">Unit Price</th>
+                <th style="text-align: right; width: 13%;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic Rows -->
+            </tbody>
+          </table>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 10px; gap: 20px;">
+            <div id="trade-shipping-notes" style="font-size: 0.65rem; color: var(--text-gray); max-width: 50%; border: 1px solid var(--border); border-radius: 6px; padding: 6px; display: none;">
+              <strong>Container Details:</strong> <span id="trade-container-seal">-</span>
+            </div>
+            <div style="margin-left: auto; min-width: 200px;">
+              <table class="doc-table-totals">
+                <tr id="trade-subtotal-row">
+                  <td style="color: var(--text-gray); font-size: 0.7rem; padding: 4px 6px;">Subtotal:</td>
+                  <td style="text-align: right; font-weight: 600; padding: 4px 6px;" id="trade-subtotal-val">-</td>
+                </tr>
+                <tr id="trade-freight-row" style="display: none;">
+                  <td style="color: var(--text-gray); font-size: 0.7rem; padding: 4px 6px;">Freight Charges:</td>
+                  <td style="text-align: right; padding: 4px 6px;" id="trade-freight-val">-</td>
+                </tr>
+                <tr id="trade-insurance-row" style="display: none;">
+                  <td style="color: var(--text-gray); font-size: 0.7rem; padding: 4px 6px;">Insurance:</td>
+                  <td style="text-align: right; padding: 4px 6px;" id="trade-insurance-val">-</td>
+                </tr>
+                <tr class="grand-total">
+                  <td style="color: var(--primary); font-size: 0.75rem; text-transform: uppercase; padding: 5px 6px;">Grand Total:</td>
+                  <td style="text-align: right; font-size: 0.82rem; padding: 5px 6px;" id="trade-total-val">-</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div id="trade-bank-details" style="margin-top: 15px; border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); font-size: 0.7rem;">
+            <h4 style="font-size: 0.72rem; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 2px; font-weight: 700;"><i class="fa-solid fa-building-columns"></i> Bank Payment Routing Instructions</h4>
+            <div style="display: grid; grid-template-columns: 80px 1.5fr 80px 1fr; gap: 4px 8px;">
+              <span style="color: var(--text-gray);">Bank Name:</span>
+              <strong id="prevBankName" style="color: var(--primary);">-</strong>
+              
+              <span style="color: var(--text-gray);">Account Name:</span>
+              <span id="prevBankAccountName" style="color: var(--primary);">-</span>
+              
+              <span style="color: var(--text-gray);">Account No:</span>
+              <strong id="prevBankAcNo" style="color: var(--primary);">-</strong>
+              
+              <span style="color: var(--text-gray);">Swift Code:</span>
+              <span id="prevBankSwift" style="color: var(--primary);">-</span>
+              
+              <span style="color: var(--text-gray);">IFSC Code:</span>
+              <span id="prevBankIfsc" style="color: var(--primary);">-</span>
+              
+              <span style="color: var(--text-gray);">Branch/AD:</span>
+              <span id="prevBankBranch" style="color: var(--primary);">-</span>
+            </div>
+          </div>
+
+          <div id="trade-declaration-box" style="margin-top: 10px; font-size: 0.65rem; color: var(--text-gray); border-top: 1px dashed var(--border); padding-top: 6px; text-align: justify; line-height: 1.3;">
+            <strong>Declaration:</strong> <span id="prevDeclaration">-</span>
+          </div>
+
+          <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: flex-end; page-break-inside: avoid;">
+            <div style="font-size: 0.68rem; color: var(--text-gray);">
+              For <strong><span id="trade-sign-company">Vishnu Balaji Global</span></strong>
+              <div style="height: 30px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 140px; text-align: center; padding-top: 2px;">Authorized Signatory</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.75rem; font-weight: 700;" id="trade-sign-name">-</div>
+              <div style="font-size: 0.68rem; color: var(--text-gray);" id="trade-sign-title">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PACKING LIST PREVIEW SECTION -->
+        <div id="preview-section-packing" style="display: none; font-size: 0.82rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; text-align: center; text-transform: uppercase; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 16px;">PACKING LIST</div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+              <h4 style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-gray); border-bottom: 1px solid var(--border); padding-bottom: 3px; margin-bottom: 5px;">Exporter (Seller)</h4>
+              <div id="packing-exporter-val" style="font-size: 0.72rem; line-height: 1.3;">
+                <strong>Vishnu Balaji Global</strong><br>
+                Imports & Exports<br>
+                Hyderabad, Telangana, India
+              </div>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+              <h4 style="font-size: 0.65rem; text-transform: uppercase; color: var(--text-gray); border-bottom: 1px solid var(--border); padding-bottom: 3px; margin-bottom: 5px;">Consignee (Buyer)</h4>
+              <div id="packing-buyer-val" style="font-size: 0.72rem; line-height: 1.3;">
+                Mr. David Thompson<br>
+                Global Agro Trading LLC
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 15px; background: rgba(0,0,0,0.005); font-size: 0.7rem;">
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Packing List No:</span>
+              <strong id="packing-doc-num">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Date:</span>
+              <strong id="packing-doc-date">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Associated Invoice:</span>
+              <strong id="packing-invoice-ref">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Port of Loading:</span>
+              <span id="packing-doc-loading">-</span>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Port of Discharge:</span>
+              <span id="packing-doc-discharge">-</span>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Origin Country:</span>
+              <span>India</span>
+            </div>
+            <div style="grid-column: span 3;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Shipping Marks & Nos:</span>
+              <span id="packing-doc-marks">-</span>
+            </div>
+          </div>
+
+          <table class="doc-table" id="packing-items-table">
+            <thead>
+              <tr>
+                <th style="width: 10%;">Pkg Range</th>
+                <th style="width: 42%;">Description of Goods</th>
+                <th style="text-align: right; width: 10%;">Qty</th>
+                <th style="text-align: right; width: 12%;">Net Wt (kg)</th>
+                <th style="text-align: right; width: 12%;">Gross Wt (kg)</th>
+                <th style="text-align: right; width: 14%;">Dims (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic Rows -->
+            </tbody>
+          </table>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; margin-top: 12px; font-size: 0.7rem;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); line-height: 1.3;">
+              <h5 style="margin-bottom: 4px; text-transform: uppercase; font-size: 0.6rem; color: var(--text-gray); font-weight: 700;">Container & Seal Details</h5>
+              Container No / Seal: <strong id="packing-container-seal" style="color: var(--primary);">-</strong>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+              <h5 style="margin-bottom: 4px; text-transform: uppercase; font-size: 0.6rem; color: var(--text-gray); font-weight: 700;">Summary Weights & Volume</h5>
+              <div style="display: grid; grid-template-columns: 100px 1fr; gap: 2px; line-height: 1.3;">
+                <span style="color: var(--text-gray);">Total Packages:</span>
+                <strong id="packing-total-packages">-</strong>
+                
+                <span style="color: var(--text-gray);">Total Qty (Bags/Units):</span>
+                <strong id="packing-total-qty">-</strong>
+                
+                <span style="color: var(--text-gray);">Total Net Weight:</span>
+                <strong id="packing-total-netwt">-</strong>
+                
+                <span style="color: var(--text-gray);">Total Gross Weight:</span>
+                <strong id="packing-total-grosswt">-</strong>
+                
+                <span style="color: var(--text-gray);">Total Volume CBM:</span>
+                <strong id="packing-total-cbm">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: flex-end; page-break-inside: avoid;">
+            <div style="font-size: 0.68rem; color: var(--text-gray);">
+              For <strong><span id="packing-sign-company">Vishnu Balaji Global</span></strong>
+              <div style="height: 30px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 140px; text-align: center; padding-top: 2px;">Authorized Signatory</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.75rem; font-weight: 700;" id="packing-sign-name">-</div>
+              <div style="font-size: 0.68rem; color: var(--text-gray);" id="packing-sign-title">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATE OF ORIGIN PREVIEW SECTION -->
+        <div id="preview-section-coo" style="display: none; font-size: 0.82rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; text-align: center; text-transform: uppercase; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 16px;">CERTIFICATE OF ORIGIN</div>
+          
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 8px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">1. Exporter (Seller details)</span>
+                <div id="coo-exporter-val" style="font-size: 0.72rem; line-height: 1.3;">-</div>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 5px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">2. Consignee (Buyer details)</span>
+                <div id="coo-buyer-val" style="font-size: 0.72rem; line-height: 1.3;">-</div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <div>
+                  <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Certificate No:</span>
+                  <strong id="coo-cert-num" style="font-size: 0.85rem; color: var(--primary);">-</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Date:</span>
+                  <strong id="coo-doc-date" style="font-size: 0.85rem; color: var(--primary);">-</strong>
+                </div>
+              </div>
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Country of Origin:</span>
+                <strong id="coo-origin" style="color: var(--primary); font-size: 0.78rem;">INDIA</strong>
+              </div>
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Chamber of Attestation:</span>
+                <span id="coo-chamber-val" style="font-weight: 600;">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-bottom: 15px; background: rgba(0,0,0,0.005); font-size: 0.72rem;">
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">3. Means of Transport & Route</span>
+              Vessel/Flight No: <strong id="coo-transport">-</strong><br>
+              Port of Loading: <span id="coo-loading">-</span><br>
+              Port of Discharge: <span id="coo-discharge">-</span>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">4. Shipping Marks & Nos</span>
+              <span id="coo-marks">-</span>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 15px;">
+            <table class="doc-table" style="margin-top: 0;">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Pkg range / Marks</th>
+                  <th style="width: 50%;">Description of Goods (including HS Code)</th>
+                  <th style="text-align: right; width: 25%;">Quantity / Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="coo-table-pkgs" style="font-family: monospace;">-</td>
+                  <td>
+                    <strong id="coo-table-desc">-</strong>
+                  </td>
+                  <td id="coo-table-qty" style="text-align: right; font-weight: 600;">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Declarations and Signatures -->
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 15px; border-top: 1px dashed var(--border); padding-top: 12px; margin-top: 15px;">
+            <div style="font-size: 0.65rem; color: var(--text-gray); line-height: 1.3;">
+              <h5 style="color: var(--primary); text-transform: uppercase; margin-bottom: 3px; font-weight: 700;">5. Exporter Declaration</h5>
+              We hereby declare that the goods described above originated in <strong>INDIA</strong> and correspond to all legal declarations.
+              <div style="height: 35px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 150px; text-align: center; padding-top: 2px;" id="coo-sign-exporter-name">-</div>
+            </div>
+            <div style="font-size: 0.65rem; color: var(--text-gray); line-height: 1.3; border-left: 1px solid var(--border); padding-left: 15px;">
+              <h5 style="color: var(--primary); text-transform: uppercase; margin-bottom: 3px; font-weight: 700;">6. Certification of Chamber</h5>
+              Certified that the goods described above are of Indian origin to the best of our belief and knowledge.
+              <div style="height: 35px; display: flex; align-items: center; justify-content: center;">
+                <div style="border: 2px double var(--accent); border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: var(--accent); text-transform: uppercase; transform: rotate(-10deg); opacity: 0.7; pointer-events: none;">CHAMBER SEAL</div>
+              </div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 170px; text-align: center; padding-top: 2px;">Authorized Seal & Signature</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHYTOSANITARY CERTIFICATE PREVIEW SECTION -->
+        <div id="preview-section-phyto" style="display: none; font-size: 0.8rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="text-align: center; margin-bottom: 12px;">
+            <h4 style="font-size: 0.78rem; text-transform: uppercase; color: var(--primary); letter-spacing: 0.5px; font-weight: 800;">GOVERNMENT OF INDIA</h4>
+            <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; color: var(--accent); margin: 2px 0;">PHYTOSANITARY CERTIFICATE</h3>
+            <p style="font-size: 0.6rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 1px;">Issued under Plant Quarantine Rules & FAO IPPC Guidelines</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; margin-bottom: 12px; font-size: 0.72rem;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 6px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">1. Name & Address of Exporter</span>
+                <div id="phyto-exporter-val" style="line-height: 1.3;">-</div>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">2. Declared Name of Consignee</span>
+                <div id="phyto-buyer-val" style="line-height: 1.3;">-</div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005);">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Certificate No:</span>
+                <strong id="phyto-cert-num" style="font-size: 0.8rem; color: var(--primary);">-</strong>
+              </div>
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005);">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Place of Issue:</span>
+                <strong style="color: var(--primary); font-size: 0.72rem;">PORT QUARANTINE, INDIA</strong>
+              </div>
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005);">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Means of Conveyance:</span>
+                <span id="phyto-transport-val">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.005); font-size: 0.72rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 12px;">
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">3. Declared Point of Entry:</span>
+              <strong id="phyto-entry-val">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">4. Botanical Name of Plants:</span>
+              <strong id="phyto-botanical-val" style="font-style: italic;">-</strong>
+            </div>
+            <div style="grid-column: span 2; border-top: 1px solid var(--border); padding-top: 4px;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">5. Description of Consignment:</span>
+              <span id="phyto-cons-val">-</span>
+            </div>
+          </div>
+
+          <!-- Treatment Section -->
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.005); font-size: 0.72rem;">
+            <h5 style="color: var(--primary); font-size: 0.72rem; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--border); padding-bottom: 2px; font-weight: 700;"><i class="fa-solid fa-virus-slash"></i> Disinfestation & Disinfection Treatment</h5>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 10px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Treatment:</span>
+                <span id="phyto-treat-val">-</span>
+              </div>
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Date:</span>
+                <span id="phyto-treat-date">-</span>
+              </div>
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Chemical / Active Ingredient:</span>
+                <strong id="phyto-treat-chem">-</strong>
+              </div>
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Concentration / Dosage:</span>
+                <span id="phyto-treat-dose">-</span>
+              </div>
+              <div style="grid-column: span 2;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Duration & Temperature:</span>
+                <span id="phyto-treat-dur">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; font-size: 0.65rem; color: var(--text-gray); text-align: justify; line-height: 1.3; margin-bottom: 12px; background: rgba(0,0,0,0.005);">
+            <strong>6. Official Attestation Statement:</strong> This is to certify that the plants, plant products or other regulated articles described herein have been inspected and/or tested according to appropriate official procedures and are considered to be free from the quarantine pests specified by the importing contracting party and to conform with the current phytosanitary requirements of the importing contracting party.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; page-break-inside: avoid; margin-top: 15px;">
+            <div style="font-size: 0.65rem; color: var(--text-gray);">
+              Authority: <strong id="phyto-treat-auth">-</strong>
+              <div style="height: 25px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 180px; text-align: center; padding-top: 2px;">Plant Quarantine Officer Signature</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="border: 2px double #10b981; border-radius: 4px; width: 60px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: #10b981; text-transform: uppercase; transform: rotate(-5deg); opacity: 0.6; pointer-events: none; margin-bottom: 5px;">PASSED PQ</div>
+              <div style="font-size: 0.72rem; font-weight: 700;" id="phyto-sign-name">-</div>
+              <div style="font-size: 0.65rem; color: var(--text-gray);" id="phyto-sign-title">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SGS QUALITY CERTIFICATE PREVIEW SECTION -->
+        <div id="preview-section-sgs" style="display: none; font-size: 0.8rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="text-align: center; margin-bottom: 12px;">
+            <h3 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800; text-transform: uppercase; color: #e11d48; margin: 2px 0;">SGS QUALITY & QUANTITY CERTIFICATE</h3>
+            <p style="font-size: 0.6rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 1px;">INDEPENDENT SURVEYOR REPORT OF LOADING & INSPECTION</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 12px; font-size: 0.72rem;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 4px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Exporter (Seller):</span>
+                <div id="sgs-exporter-val" style="line-height: 1.3; font-weight: 600;">-</div>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px; margin-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Consignee (Buyer):</span>
+                <div id="sgs-buyer-val" style="line-height: 1.3; font-weight: 600;">-</div>
+              </div>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">SGS Report No:</span>
+                <strong id="sgs-cert-num" style="font-size: 0.78rem; color: var(--primary);">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Inspection Place & Date:</span>
+                <span id="sgs-date-val" style="font-weight: 600;">-</span>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Container & Seal:</span>
+                <span id="sgs-container-val">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.005); font-size: 0.72rem;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.72rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border); font-weight: bold; text-align: left;">
+                  <th style="padding-bottom: 4px;">Parameter Analysed</th>
+                  <th style="padding-bottom: 4px;">Specifications Required</th>
+                  <th style="padding-bottom: 4px; text-align: right;">Observed Value</th>
+                </tr>
+              </thead>
+              <tbody id="sgs-table-body">
+                <tr>
+                  <td style="padding: 4px 0;">Moisture Content</td>
+                  <td>Max 12.0%</td>
+                  <td style="text-align: right; font-weight: 700; color: #10b981;">11.2% (Passed)</td>
+                </tr>
+                <tr style="border-top: 1px solid rgba(0,0,0,0.03);">
+                  <td style="padding: 4px 0;">Broken Grain</td>
+                  <td>Max 2.0%</td>
+                  <td style="text-align: right; font-weight: 700; color: #10b981;">1.8% (Passed)</td>
+                </tr>
+                <tr style="border-top: 1px solid rgba(0,0,0,0.03);">
+                  <td style="padding: 4px 0;">Purity Level</td>
+                  <td>Min 95%</td>
+                  <td style="text-align: right; font-weight: 700; color: #10b981;">98.5% (Passed)</td>
+                </tr>
+                <tr style="border-top: 1px solid rgba(0,0,0,0.03);">
+                  <td style="padding: 4px 0;">Foreign Matter</td>
+                  <td>Max 0.5%</td>
+                  <td style="text-align: right; font-weight: 700; color: #10b981;">0.1% (Passed)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; font-size: 0.65rem; color: var(--text-gray); text-align: justify; line-height: 1.3; margin-bottom: 12px; background: rgba(0,0,0,0.005);">
+            <strong>Inspection Verdict:</strong> This is to certify that we have inspected the consignment of goods described above at the loading terminal. Representative samples were drawn at random and analysed. The goods comply with all contract parameters and quality parameters specified. The container loading was witnessed and container sealed in our presence.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
+            <div style="font-size: 0.65rem; color: var(--text-gray);">
+              Surveyor ID: <strong>SGS-IND-77492</strong>
+              <div style="height: 25px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 180px; text-align: center; padding-top: 2px;">SGS India Inspector Signature</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="border: 2px double #e11d48; border-radius: 4px; width: 75px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: #e11d48; text-transform: uppercase; transform: rotate(-5deg); opacity: 0.7; pointer-events: none; margin-bottom: 5px;">SGS SURVEYED</div>
+              <div style="font-size: 0.72rem; font-weight: 700;">SGS India Surveyors Ltd</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUSTOMS SHIPPING BILL PREVIEW SECTION -->
+        <div id="preview-section-shippingbill" style="display: none; font-size: 0.78rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="text-align: center; margin-bottom: 12px; border-bottom: 2px solid var(--primary); padding-bottom: 6px;">
+            <h4 style="font-size: 0.75rem; text-transform: uppercase; color: var(--primary); font-weight: 800; margin:0;">GOVERNMENT OF INDIA - DEPARTMENT OF REVENUE</h4>
+            <h3 style="font-family: var(--font-serif); font-size: 1.2rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin: 2px 0;">SHIPPING BILL FOR EXPORT</h3>
+            <p style="font-size: 0.58rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 0.5px; margin: 0;">ICEGATE Electronic Filing receipt under Section 50 of the Customs Act</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; font-size: 0.68rem; border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Shipping Bill No:</span>
+              <strong id="sb-bill-num" style="color: var(--primary); font-size:0.75rem;">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Filing Date:</span>
+              <strong id="sb-date-val" style="color: var(--primary);">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Port of Loading:</span>
+              <span id="sb-port-loading">-</span>
+            </div>
+            <div style="border-top:1px solid var(--border); padding-top:4px; grid-column: span 2;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Exporter IEC & GSTIN:</span>
+              <span style="font-weight: 600;">IEC: DYDPS1733L / GSTIN: 36DYDPS1733L1Z2</span>
+            </div>
+            <div style="border-top:1px solid var(--border); padding-top:4px;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Port of Discharge:</span>
+              <span id="sb-port-discharge">-</span>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.005); font-size: 0.68rem;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border); font-weight: bold; text-align: left; font-size:0.6rem; color:var(--text-gray);">
+                  <th>Item No</th>
+                  <th>HS Code</th>
+                  <th>Description of Goods</th>
+                  <th style="text-align: right;">Quantity</th>
+                  <th style="text-align: right;">FOB Value</th>
+                </tr>
+              </thead>
+              <tbody id="sb-table-body">
+                <!-- Mapped via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px; font-size: 0.68rem; margin-bottom: 12px;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005);">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Customs Incentive Declarations:</span>
+              <div style="margin-top: 2px;">• Export Scheme: **RoDTEP Claim Active** (Rate: 1.4%)</div>
+              <div>• Export under LUT (Letter of Undertaking) - No IGST Paid. Reference: **LUT/2026-27/2940**</div>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">ICEGATE Status:</span>
+              <strong style="color: #10b981; font-size: 0.72rem; margin-top: 4px;"><i class="fa-solid fa-cloud-arrow-up"></i> FILING ACKNOWLEDGED</strong>
+              <div style="font-size: 0.58rem; color: var(--text-gray); margin-top: 2px;">AD Code Linked & Validated</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUSTOMS LEO APPROVAL PREVIEW SECTION -->
+        <div id="preview-section-leo" style="display: none; font-size: 0.8rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="text-align: center; margin-bottom: 15px; border: 2px solid #10b981; padding: 10px; border-radius: 6px; background: rgba(16, 185, 129, 0.03);">
+            <h4 style="font-size: 0.72rem; text-transform: uppercase; color: #10b981; font-weight: 800; margin: 0; letter-spacing: 1px;">INDIAN CUSTOMS SYSTEM - ICEGATE</h4>
+            <h3 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800; text-transform: uppercase; color: #10b981; margin: 4px 0;">LET EXPORT ORDER (LEO)</h3>
+            <p style="font-size: 0.6rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 0.5px; margin: 0;">OFFICIAL ORDER AUTHORIZING CARGO DEPARTURE UNDER SECTION 51 OF CUSTOMS ACT</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; font-size: 0.75rem;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 10px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 6px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">LEO Clearance Certificate No:</span>
+                <strong id="leo-cert-num" style="font-size: 0.85rem; color: #10b981;">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Date of Customs Clearance:</span>
+                <strong id="leo-date-val" style="color: var(--primary);">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Associated Shipping Bill Reference:</span>
+                <strong id="leo-sb-ref" style="color: var(--primary);">-</strong>
+              </div>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 10px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 6px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Port of Gate-Out & Loading:</span>
+                <span id="leo-port-val" style="font-weight: 600;">-</span>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Container & Customs Seal:</span>
+                <span id="leo-container-val" style="font-weight: 600;">-</span>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.58rem; display: block;">Customs Broker Name (CHA):</span>
+                <span style="font-weight: 600;">V. B. Logistics (CHA Lic: 11/1092)</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-size: 0.72rem; color: var(--text-gray); text-align: justify; line-height: 1.4; margin-bottom: 15px; background: rgba(0,0,0,0.005);">
+            <strong>Official customs attestation:</strong> Checked and verified shipping bill details, goods parameters, export declarations, and biological certifications. Cargo container has been scanned and customs paper seal verified. The exporter is hereby granted permission to export the goods described and load them on board the carrier.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 25px;">
+            <div style="font-size: 0.7rem; color: var(--text-gray);">
+              Customs Officer: **Deputy Commissioner of Customs**
+              <div style="height: 30px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 200px; text-align: center; padding-top: 2px;">Assigned Customs Officer Stamp</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="border: 3px solid #10b981; border-radius: 4px; width: 90px; height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: #10b981; text-transform: uppercase; transform: rotate(-5deg); opacity: 0.8; pointer-events: none; margin-bottom: 5px;">
+                <strong>LET EXPORT</strong>
+                <span style="font-size: 5px; opacity: 0.8;">PORT CUSTOMS SEAL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BILL OF LADING PREVIEW SECTION -->
+        <div id="preview-section-lading" style="display: none; font-size: 0.72rem; line-height: 1.35; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 10px;">
+            <div>
+              <h2 style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 900; color: #2563eb; margin: 0; text-transform: uppercase;">MAERSK LINE</h2>
+              <span style="font-size: 0.55rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 0.5px;">Ocean Carrier Bill of Lading - Negotiable</span>
+            </div>
+            <div style="text-align: right;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">B/L Number:</span>
+              <strong id="bl-bill-num" style="font-size: 0.8rem; color: var(--primary);">-</strong>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; margin-bottom: 8px; font-size: 0.68rem;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005); min-height: 55px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Exporter / Shipper:</span>
+                <div id="bl-shipper-val" style="font-weight: 600;">-</div>
+              </div>
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005); min-height: 55px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Consignee / Buyer:</span>
+                <div id="bl-consignee-val" style="font-weight: 600;">-</div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005); min-height: 55px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Notify Party (L/C terms):</span>
+                <div id="bl-notify-val" style="font-weight: 600;">Same as Consignee</div>
+              </div>
+              <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; background: rgba(0,0,0,0.005); display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                <div>
+                  <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Pre-Carriage:</span>
+                  <span style="font-weight: 600;">Road Logistics</span>
+                </div>
+                <div>
+                  <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Vessel & Voyage:</span>
+                  <span id="bl-vessel-val">-</span>
+                </div>
+                <div>
+                  <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Port of Loading:</span>
+                  <span id="bl-loading-val">-</span>
+                </div>
+                <div>
+                  <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.52rem; display: block;">Port of Discharge:</span>
+                  <span id="bl-discharge-val">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; margin-bottom: 8px; background: rgba(0,0,0,0.005); font-size: 0.68rem;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border); font-weight: bold; text-align: left; font-size: 0.55rem; color: var(--text-gray);">
+                  <th>Container & Seals</th>
+                  <th>Packages & Description</th>
+                  <th style="text-align: right;">Gross Weight</th>
+                  <th style="text-align: right;">Net Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="bl-container-val" style="font-family: monospace;">-</td>
+                  <td id="bl-goods-val" style="font-weight: 600;">-</td>
+                  <td id="bl-gross-val" style="text-align: right;">-</td>
+                  <td id="bl-net-val" style="text-align: right;">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 6px; font-size: 0.58rem; color: var(--text-gray); text-align: justify; line-height: 1.3; background: rgba(0,0,0,0.005); margin-bottom: 8px;">
+            **Terms of Carriage:** Shipped on board in apparent good order and condition. Weight, measure, marks, numbers, quality, quantity, condition, contents and value unknown. To be delivered at Port of Discharge unto consignee or their authorized assignee. Freights prepaid.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 10px;">
+            <div style="font-size: 0.65rem; color: var(--text-gray);">
+              Carrier Agent Code: **MAERSK-IN-392**
+              <div style="height: 20px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 170px; text-align: center; padding-top: 2px;">Authorized Carrier Signature</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="border: 2px double #2563eb; border-radius: 4px; width: 75px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: #2563eb; text-transform: uppercase; transform: rotate(-5deg); opacity: 0.7; pointer-events: none; margin-bottom: 2px;">SHIPPED ON BOARD</div>
+              <div style="font-size: 0.65rem; font-weight: 700;">Maersk Line India Private Ltd</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- E-BRC CERTIFICATE PREVIEW SECTION -->
+        <div id="preview-section-ebrc" style="display: none; font-size: 0.8rem; line-height: 1.4; color: var(--primary); margin-top: 20px; z-index: 10;">
+          <div style="text-align: center; margin-bottom: 12px; border-bottom: 2px solid var(--accent); padding-bottom: 6px;">
+            <h4 style="font-size: 0.75rem; text-transform: uppercase; color: var(--primary); font-weight: 800; margin: 0;">RESERVE BANK OF INDIA - BANK REALIZATION PORTAL</h4>
+            <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; color: var(--accent); margin: 2px 0;">ELECTRONIC BANK REALIZATION CERTIFICATE (e-BRC)</h3>
+            <p style="font-size: 0.58rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 0.5px; margin: 0;">电子银行结汇证明 - Issued by AD Bank verifying realization of foreign exchange values</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; margin-bottom: 12px; font-size: 0.72rem;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 6px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Realizing Bank:</span>
+                <strong id="ebrc-bank-name" style="color: var(--primary);">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Authorized Dealer AD Code:</span>
+                <strong id="ebrc-ad-code" style="color: var(--primary);">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Exporter Name & Details:</span>
+                <span id="ebrc-exporter-val" style="font-weight: 600;">-</span>
+              </div>
+            </div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: rgba(0,0,0,0.005); display: flex; flex-direction: column; gap: 6px;">
+              <div>
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">e-BRC Number:</span>
+                <strong id="ebrc-cert-num" style="font-size: 0.8rem; color: var(--accent);">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Realization Date:</span>
+                <strong id="ebrc-date-val" style="color: var(--primary);">-</strong>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 4px;">
+                <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Realized Net FOB Value:</span>
+                <strong id="ebrc-fob-val" style="color: #10b981; font-size: 0.8rem;">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 12px; background: rgba(0,0,0,0.005); font-size: 0.72rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 12px;">
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Currency of Realization:</span>
+              <strong id="ebrc-currency-val">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Exchange Rate Applied:</span>
+              <span id="ebrc-rate-val">-</span>
+            </div>
+            <div style="border-top: 1px solid var(--border); padding-top: 4px; grid-column: span 2;">
+              <span style="color: var(--text-gray); text-transform: uppercase; font-size: 0.55rem; display: block;">Shipping Bill Mapping:</span>
+              <span>Shipping Bill Number: **S/B 482910** mapped on customs server. Mapped to IEC: **DYDPS1733L**.</span>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; font-size: 0.65rem; color: var(--text-gray); text-align: justify; line-height: 1.3; margin-bottom: 12px; background: rgba(0,0,0,0.005);">
+            <strong>Certification Verification:</strong> We certify that the payment against the export cargo described in the shipping bill was realized in foreign exchange on the date specified above. The details have been transmitted electronically via the IRPMS bank portal to DGFT to credit relevant export incentives under current policies.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px;">
+            <div style="font-size: 0.65rem; color: var(--text-gray);">
+              Signatory Bank AD Code: **SBI-COMM-0102**
+              <div style="height: 25px;"></div>
+              <div style="border-top: 1px dashed var(--text-gray); width: 180px; text-align: center; padding-top: 2px;">AD Bank Authorized Signature</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="border: 2px double var(--accent); border-radius: 4px; width: 85px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: var(--accent); text-transform: uppercase; transform: rotate(-5deg); opacity: 0.7; pointer-events: none; margin-bottom: 5px;">BANK REALIZED</div>
+              <div style="font-size: 0.72rem; font-weight: 700;">State Bank of India</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Letter Footer -->
+        <div class="letter-footer" id="prevFooter">
+          <!-- Rendered differently per style -->
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let currentStyle = 'style-classic';
+    let logoSrc = 'logo.png';
+
+    // Helper functions for safe DOM updates
+    function setTxt(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+    function setHTML(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = val;
+    }
+
+    // Global arrays to hold dynamic table records for Trade Documents
+    let invoiceItems = [
+      { desc: "1121 Basmati Rice - Premium Long Grain Aged", hscode: "1006.30", qty: 50, unit: "MT", price: 950 }
+    ];
+    let packingItems = [
+      { pkgNo: "1-2500", desc: "1121 Basmati Rice in 20kg PP Bags", qty: 2500, netwt: 50000, grosswt: 50500, dims: "120x80x160" }
+    ];
+
+    function handleLogoUpload(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          logoSrc = e.target.result;
+          document.getElementById('prevLogo').src = logoSrc;
+          document.querySelector('.watermark').style.backgroundImage = `url('${logoSrc}')`;
+          document.getElementById('btnResetLogo').style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function resetLogo() {
+      logoSrc = 'logo.png';
+      document.getElementById('prevLogo').src = logoSrc;
+      document.querySelector('.watermark').style.backgroundImage = `url('${logoSrc}')`;
+      document.getElementById('btnResetLogo').style.display = 'none';
+      document.getElementById('inputLogo').value = '';
+    }
+
+    // Dynamic footer HTML generator based on template style and current branding values
+    function getFooterHTML(styleName) {
+      const companyName = (document.getElementById('inputCompanyName').value.trim() || 'Vishnu Balaji Global').toUpperCase();
+      const rawCompanyName = document.getElementById('inputCompanyName').value.trim() || 'Vishnu Balaji Global';
+      const subtitle = document.getElementById('inputCompanySubtitle').value.trim() || 'Imports & Exports';
+      const tagline = document.getElementById('inputTagline').value.trim() || 'Direct Farm-to-Shipment Solutions';
+      const address = document.getElementById('inputAddress').value.trim() || 'Hyderabad, Telangana, India';
+      const phone = document.getElementById('inputPhone').value.trim() || '+91 91606 66483';
+      const email = document.getElementById('inputEmail').value.trim() || 'sales@vishnubalajiglobal.com, depu.sep13@gmail.com';
+      const website = document.getElementById('inputWebsite').value.trim() || 'vishnubalajiglobal.com';
+
+      const formattedEmail = (email.includes('/') || email.includes(',')) ? email.split(/[\/,]/).map(e => e.trim()).join('<br>') : email;
+      const inlineEmail = (email.includes('/') || email.includes(',')) ? email.split(/[\/,]/).map(e => e.trim()).join(', ') : email;
+
+      if (styleName === 'style-classic') {
+        return `
+          <div class="footer-slogan">${tagline}</div>
+          <div>Office: ${address} &nbsp;|&nbsp; Tel: ${phone} &nbsp;|&nbsp; Email: ${inlineEmail} &nbsp;|&nbsp; Web: ${website}</div>
+        `;
+      } else if (styleName === 'style-modern') {
+        return `
+          <div class="footer-left">
+            <div class="footer-bold">${companyName}</div>
+            <div>${tagline}</div>
+          </div>
+          <div class="footer-right">
+            <div>${address}</div>
+            <div>${phone} &nbsp;&bull;&nbsp; ${inlineEmail} &nbsp;&bull;&nbsp; ${website}</div>
+          </div>
+        `;
+      } else if (styleName === 'style-minimal') {
+        return `
+          <div class="footer-col">
+            <i class="fa-solid fa-location-dot"></i>
+            <strong>GLOBAL OFFICE</strong>
+            <div>${address}</div>
+          </div>
+          <div class="footer-col">
+            <i class="fa-solid fa-paper-plane"></i>
+            <strong>CONTACT INQUIRIES</strong>
+            <div>${phone}</div>
+            <div>${formattedEmail}</div>
+          </div>
+          <div class="footer-col">
+            <i class="fa-solid fa-globe"></i>
+            <strong>ONLINE CHANNELS</strong>
+            <div>${website}</div>
+            <div>WhatsApp Direct Support</div>
+          </div>
+        `;
+      } else if (styleName === 'style-navy') {
+        return `
+          <div class="footer-left">${rawCompanyName}${subtitle ? ' ' + subtitle : ''}</div>
+          <div class="footer-right">Tel: ${phone} &nbsp;&bull;&nbsp; ${inlineEmail} &nbsp;&bull;&nbsp; Web: ${website}</div>
+        `;
+      }
+      return '';
+    }
+
+    // Dynamic row handlers for Invoices / PO
+    function addInvoiceItemRow(item = null) {
+      const defaultItem = item || { desc: "Premium Basmati Sourced Grains", hscode: "1006.30", qty: 10, unit: "MT", price: 800 };
+      invoiceItems.push(defaultItem);
+      renderInvoiceItemEditor();
+      updateLivePreview();
+    }
+
+    function renderInvoiceItemEditor() {
+      const container = document.getElementById("invoice-items-list");
+      if (!container) return;
+      container.innerHTML = "";
+      
+      invoiceItems.forEach((item, idx) => {
+        const row = document.createElement("div");
+        row.className = "item-row-card";
+        row.innerHTML = `
+          <button type="button" onclick="deleteInvoiceItemRow(${idx})" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 11px;" title="Delete row">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          <div class="form-group" style="margin-bottom: 8px; padding-right: 20px;">
+            <label style="font-size: 10px;">Item Description</label>
+            <input type="text" class="item-desc" value="${item.desc}" oninput="updateInvoiceItemValue(${idx}, 'desc', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+          </div>
+          <div class="form-row" style="margin-bottom: 0;">
+            <div class="form-group" style="flex: 1.2;">
+              <label style="font-size: 10px;">HS Code</label>
+              <input type="text" class="item-hscode" value="${item.hscode}" oninput="updateInvoiceItemValue(${idx}, 'hscode', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 0.8;">
+              <label style="font-size: 10px;">Qty</label>
+              <input type="number" class="item-qty" value="${item.qty}" oninput="updateInvoiceItemValue(${idx}, 'qty', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 0.8;">
+              <label style="font-size: 10px;">Unit</label>
+              <input type="text" class="item-unit" value="${item.unit}" oninput="updateInvoiceItemValue(${idx}, 'unit', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 1.2;">
+              <label style="font-size: 10px;">Price ($/₹)</label>
+              <input type="number" class="item-price" value="${item.price}" oninput="updateInvoiceItemValue(${idx}, 'price', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function updateInvoiceItemValue(idx, field, value) {
+      if (invoiceItems[idx]) {
+        if (field === 'qty' || field === 'price') {
+          invoiceItems[idx][field] = parseFloat(value) || 0;
+        } else {
+          invoiceItems[idx][field] = value;
+        }
+        updateLivePreview();
+      }
+    }
+
+    function deleteInvoiceItemRow(idx) {
+      invoiceItems.splice(idx, 1);
+      renderInvoiceItemEditor();
+      updateLivePreview();
+    }
+
+    // Dynamic row handlers for Packing List
+    function addPackingItemRow(item = null) {
+      const defaultItem = item || { pkgNo: "1-500", desc: "Premium White Sourced Rice in 20kg bags", qty: 500, netwt: 10000, grosswt: 10100, dims: "120x80x160" };
+      packingItems.push(defaultItem);
+      renderPackingItemEditor();
+      updateLivePreview();
+    }
+
+    function renderPackingItemEditor() {
+      const container = document.getElementById("packing-items-list");
+      if (!container) return;
+      container.innerHTML = "";
+      
+      packingItems.forEach((item, idx) => {
+        const row = document.createElement("div");
+        row.className = "package-row-card";
+        row.innerHTML = `
+          <button type="button" onclick="deletePackingItemRow(${idx})" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 11px;" title="Delete row">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          <div class="form-row" style="margin-bottom: 8px;">
+            <div class="form-group" style="flex: 0.8;">
+              <label style="font-size: 10px;">Pkg Range</label>
+              <input type="text" class="pkg-no" value="${item.pkgNo}" oninput="updatePackingItemValue(${idx}, 'pkgNo', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 2.2;">
+              <label style="font-size: 10px;">Goods Description</label>
+              <input type="text" class="pkg-desc" value="${item.desc}" oninput="updatePackingItemValue(${idx}, 'desc', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 0;">
+            <div class="form-group" style="flex: 0.7;">
+              <label style="font-size: 10px;">Qty</label>
+              <input type="number" class="pkg-qty" value="${item.qty}" oninput="updatePackingItemValue(${idx}, 'qty', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 0.8;">
+              <label style="font-size: 10px;">Net Wt (kg)</label>
+              <input type="number" class="pkg-netwt" value="${item.netwt}" oninput="updatePackingItemValue(${idx}, 'netwt', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 0.8;">
+              <label style="font-size: 10px;">Gross (kg)</label>
+              <input type="number" class="pkg-grosswt" value="${item.grosswt}" oninput="updatePackingItemValue(${idx}, 'grosswt', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+            <div class="form-group" style="flex: 1.2;">
+              <label style="font-size: 10px;">Dims (LxWxH cm)</label>
+              <input type="text" class="pkg-dims" value="${item.dims}" oninput="updatePackingItemValue(${idx}, 'dims', this.value)" style="padding: 6px 10px; font-size: 0.8rem; background: var(--editor-input);">
+            </div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function updatePackingItemValue(idx, field, value) {
+      if (packingItems[idx]) {
+        if (field === 'qty' || field === 'netwt' || field === 'grosswt') {
+          packingItems[idx][field] = parseFloat(value) || 0;
+        } else {
+          packingItems[idx][field] = value;
+        }
+        updateLivePreview();
+      }
+    }
+
+    function deletePackingItemRow(idx) {
+      packingItems.splice(idx, 1);
+      renderPackingItemEditor();
+      updateLivePreview();
+    }
+
+    // Handles layout switching when document type selector is triggered
+    function handleDocTypeChange() {
+      const type = document.getElementById("inputDocType").value;
+      
+      const letterheadGroup = document.getElementById("content-letterhead-group");
+      const invoiceGroup = document.getElementById("content-invoice-items-group");
+      const packingGroup = document.getElementById("content-packing-items-group");
+      const bankGroup = document.getElementById("content-bank-details-group");
+      const decGroup = document.getElementById("content-declaration-group");
+      
+      const tradeMetaGroup = document.getElementById("metadata-trade-group");
+      const packingMetaGroup = document.getElementById("metadata-packing-group");
+      const shippingGroup = document.getElementById("shipping-cargo-group");
+      
+      const cooGroup = document.getElementById("metadata-coo-group");
+      const phytoGroup = document.getElementById("metadata-phyto-group");
+      
+      const labelRef = document.getElementById("labelRef");
+      const labelRecipient = document.getElementById("labelRecipient");
+      const labelDueDate = document.getElementById("labelDueDate");
+
+      // Hide all dynamic inputs
+      letterheadGroup.style.display = "none";
+      invoiceGroup.style.display = "none";
+      packingGroup.style.display = "none";
+      bankGroup.style.display = "none";
+      decGroup.style.display = "none";
+      tradeMetaGroup.style.display = "none";
+      packingMetaGroup.style.display = "none";
+      shippingGroup.style.display = "none";
+      cooGroup.style.display = "none";
+      phytoGroup.style.display = "none";
+
+      // Hide all A4 preview layouts
+      document.getElementById("preview-section-letterhead").style.display = "none";
+      document.getElementById("preview-section-trade").style.display = "none";
+      document.getElementById("preview-section-packing").style.display = "none";
+      document.getElementById("preview-section-coo").style.display = "none";
+      document.getElementById("preview-section-phyto").style.display = "none";
+      document.getElementById("preview-section-sgs").style.display = "none";
+      document.getElementById("preview-section-shippingbill").style.display = "none";
+      document.getElementById("preview-section-leo").style.display = "none";
+      document.getElementById("preview-section-lading").style.display = "none";
+      document.getElementById("preview-section-ebrc").style.display = "none";
+
+      if (type === "letterhead") {
+        letterheadGroup.style.display = "block";
+        document.getElementById("preview-section-letterhead").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "flex";
+        
+        labelRef.innerText = "Reference No.";
+        labelRecipient.innerText = "Recipient Details";
+      } else if (type === "proforma" || type === "commercial" || type === "po") {
+        invoiceGroup.style.display = "block";
+        tradeMetaGroup.style.display = "block";
+        document.getElementById("preview-section-trade").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        if (type === "proforma") {
+          labelRef.innerText = "Proforma Invoice No.";
+          labelRecipient.innerText = "Consignee / Buyer Details";
+          labelDueDate.innerText = "Offer Valid Until";
+          bankGroup.style.display = "block";
+          decGroup.style.display = "block";
+        } else if (type === "commercial") {
+          labelRef.innerText = "Commercial Invoice No.";
+          labelRecipient.innerText = "Consignee / Buyer Details";
+          labelDueDate.innerText = "Payment Due Date";
+          bankGroup.style.display = "block";
+          decGroup.style.display = "block";
+          shippingGroup.style.display = "block"; 
+        } else if (type === "po") {
+          labelRef.innerText = "Purchase Order No.";
+          labelRecipient.innerText = "Supplier Details (Seller)";
+          labelDueDate.innerText = "Delivery Deadline";
+        }
+      } else if (type === "packing") {
+        packingGroup.style.display = "block";
+        tradeMetaGroup.style.display = "block";
+        packingMetaGroup.style.display = "block";
+        shippingGroup.style.display = "block";
+        document.getElementById("preview-section-packing").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "Packing List No.";
+        labelRecipient.innerText = "Consignee / Buyer Details";
+        labelDueDate.innerText = "Expected Sailing Date";
+      } else if (type === "origin") {
+        tradeMetaGroup.style.display = "block";
+        packingMetaGroup.style.display = "block";
+        cooGroup.style.display = "block";
+        document.getElementById("preview-section-coo").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "Certificate No.";
+        labelRecipient.innerText = "Consignee / Buyer Details";
+        labelDueDate.innerText = "Sailing Date";
+      } else if (type === "phyto") {
+        tradeMetaGroup.style.display = "block";
+        phytoGroup.style.display = "block";
+        document.getElementById("preview-section-phyto").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "Certificate No.";
+        labelRecipient.innerText = "Consignee / Buyer Details";
+        labelDueDate.innerText = "Date of Inspection";
+      } else if (type === "sgs") {
+        tradeMetaGroup.style.display = "block";
+        packingMetaGroup.style.display = "block";
+        invoiceGroup.style.display = "block";
+        shippingGroup.style.display = "block";
+        document.getElementById("preview-section-sgs").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "SGS Report Certificate No.";
+        labelRecipient.innerText = "Consignee / Buyer Details";
+        labelDueDate.innerText = "Date of Inspection";
+      } else if (type === "shippingbill") {
+        tradeMetaGroup.style.display = "block";
+        packingMetaGroup.style.display = "block";
+        invoiceGroup.style.display = "block";
+        shippingGroup.style.display = "block";
+        document.getElementById("preview-section-shippingbill").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "Customs Shipping Bill No.";
+        labelRecipient.innerText = "Consignee / Buyer Details";
+        labelDueDate.innerText = "ICEGATE Filing Date";
+      } else if (type === "leo") {
+        tradeMetaGroup.style.display = "block";
+        shippingGroup.style.display = "block";
+        packingMetaGroup.style.display = "block";
+        document.getElementById("preview-section-leo").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "Customs LEO Permit No.";
+        labelRecipient.innerText = "Consignee / Buyer Details";
+        labelDueDate.innerText = "Clearance Approval Date";
+      } else if (type === "lading") {
+        tradeMetaGroup.style.display = "block";
+        shippingGroup.style.display = "block";
+        packingMetaGroup.style.display = "block";
+        document.getElementById("preview-section-lading").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "Bill of Lading No.";
+        labelRecipient.innerText = "Consignee Details (Direct)";
+        labelDueDate.innerText = "Vessel Sailing Date";
+      } else if (type === "ebrc") {
+        bankGroup.style.display = "block";
+        invoiceGroup.style.display = "block";
+        document.getElementById("preview-section-ebrc").style.display = "block";
+        document.getElementById("emptyModeToggle").parentElement.style.display = "none";
+        
+        labelRef.innerText = "e-BRC Certificate No.";
+        labelRecipient.innerText = "Realizing Bank Branch";
+        labelDueDate.innerText = "Realization Date";
+      }
+
+      updateLivePreview();
+    }
+
+    // Set automatic date to today if blank
+    window.onload = function() {
+      const dateInput = document.getElementById('inputDate');
+      if (!dateInput.value) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateInput.value = new Date().toLocaleDateString('en-US', options);
+      }
+      
+      // Load direct CRM data
+      const customSubject = localStorage.getItem("active_letterhead_subject");
+      const customBody = localStorage.getItem("active_letterhead_body");
+      const customRecipient = localStorage.getItem("active_letterhead_recipient");
+      const customRef = localStorage.getItem("active_letterhead_ref");
+      
+      if (customSubject) {
+        document.getElementById("inputSubject").value = customSubject;
+        localStorage.removeItem("active_letterhead_subject");
+      }
+      if (customBody) {
+        const bodyText = customBody;
+        
+        // Smarter integration: If the body text is a structured Cost Analyzer quote export,
+        // automatically switch to Proforma Invoice and pre-fill the line items table!
+        if (bodyText.includes("Sourced Product:") || bodyText.includes("FOB India Port Quote:")) {
+          document.getElementById("inputDocType").value = "proforma";
+          
+          let parsedProduct = "Sourced Export Commodity";
+          let parsedQty = 50;
+          let parsedUnit = "MT";
+          let parsedPrice = 900;
+          
+          const pMatch = bodyText.match(/Sourced Product:\s*([^\n]+)/i);
+          if (pMatch) parsedProduct = pMatch[1].trim();
+          
+          const qMatch = bodyText.match(/Order Quantity:\s*([\d\.,]+)\s*(\w+)/i);
+          if (qMatch) {
+            parsedQty = parseFloat(qMatch[1].replace(/,/g, '')) || 50;
+            parsedUnit = qMatch[2].trim();
+          }
+          
+          const priceMatch = bodyText.match(/FOB India Port Quote:\s*USD\s*([\d\.,\s]+)/i);
+          if (priceMatch) {
+            const rawVal = priceMatch[1].split('/')[0].trim();
+            parsedPrice = parseFloat(rawVal.replace(/,/g, '')) || 900;
+          }
+          
+          // Pre-populate line item
+          invoiceItems = [{
+            desc: parsedProduct,
+            hscode: parsedProduct.toLowerCase().includes("rice") ? "1006.30" : (parsedProduct.toLowerCase().includes("wheat") ? "1001.99" : "1005.90"),
+            qty: parsedQty,
+            unit: parsedUnit,
+            price: parsedPrice
+          }];
+          
+          document.getElementById("inputIncoterms").value = "FOB Origin India Ports";
+          document.getElementById("inputFreight").value = 0;
+          document.getElementById("inputInsurance").value = 0;
+          document.getElementById("inputBody").value = ""; 
+        } else {
+          document.getElementById("inputBody").value = bodyText;
+        }
+        localStorage.removeItem("active_letterhead_body");
+      }
+      if (customRecipient) {
+        document.getElementById("inputRecipient").value = customRecipient;
+        localStorage.removeItem("active_letterhead_recipient");
+      }
+      if (customRef) {
+        document.getElementById("inputRef").value = customRef;
+        localStorage.removeItem("active_letterhead_ref");
+      }
+
+      // Initialize row editors
+      renderInvoiceItemEditor();
+      renderPackingItemEditor();
+      
+      // Auto-trigger doc type configurations
+      handleDocTypeChange();
+    };
+
+    // Change template style
+    function changeStyle(styleName) {
+      currentStyle = styleName;
+      const paper = document.getElementById('a4Paper');
+      paper.className = 'a4-paper ' + styleName;
+      
+      document.querySelectorAll('.style-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById('btn-' + styleName).classList.add('active');
+      
+      document.getElementById('prevFooter').innerHTML = getFooterHTML(styleName);
+      updateLivePreview();
+    }
+
+    // Refresh Live A4 preview based on form data and document type
+    function updateLivePreview() {
+      const type = document.getElementById("inputDocType").value;
+      const companyName = document.getElementById('inputCompanyName').value.trim() || 'Vishnu Balaji Global';
+      const companySubtitle = document.getElementById('inputCompanySubtitle').value.trim() || 'Imports & Exports';
+      const phone = document.getElementById('inputPhone').value.trim() || '+91 91606 66483';
+      const email = document.getElementById('inputEmail').value.trim() || 'sales@vishnubalajiglobal.com, depu.sep13@gmail.com';
+      const website = document.getElementById('inputWebsite').value.trim() || 'vishnubalajiglobal.com';
+      const address = document.getElementById('inputAddress').value.trim() || 'Hyderabad, Telangana, India';
+      
+      const refVal = document.getElementById('inputRef').value.trim();
+      const dateVal = document.getElementById('inputDate').value.trim();
+      const recipientText = document.getElementById('inputRecipient').value.trim();
+
+      const signNameVal = document.getElementById('inputSignName').value.trim();
+      const signTitleVal = document.getElementById('inputSignTitle').value.trim();
+
+      // Branding updates
+      const words = companyName.split(' ');
+      let titleHtml = '';
+      if (words.length > 1) {
+        const lastWord = words.pop();
+        titleHtml = words.join(' ') + ` <span>${lastWord}</span>`;
+      } else {
+        titleHtml = companyName;
+      }
+      
+      const formattedEmail = (email.includes('/') || email.includes(',')) ? email.split(/[\/,]/).map(e => e.trim()).join('<br>') : email;
+
+      document.getElementById('prevCompanyTitle').innerHTML = titleHtml;
+      document.getElementById('prevCompanySubtitle').innerText = companySubtitle;
+      document.getElementById('prevHeaderPhone').innerText = phone;
+      document.getElementById('prevHeaderEmail').innerHTML = formattedEmail;
+      document.getElementById('prevHeaderWeb').innerText = website;
+      document.getElementById('prevHeaderAddress').innerText = address;
+      document.getElementById('prevSignCompany').innerText = companyName + (companySubtitle ? ' ' + companySubtitle : '');
+
+      const parseRecipient = (text) => {
+        if (!text) return '-';
+        const lines = text.split('\n');
+        let html = `<strong>${lines[0]}</strong>`;
+        for (let i = 1; i < lines.length; i++) {
+          html += `<br>${lines[i]}`;
+        }
+        return html;
+      };
+
+      const exporterAddressHTML = `<strong>${companyName}</strong><br>${companySubtitle ? companySubtitle + '<br>' : ''}${address}<br>Tel: ${phone}<br>Email: ${formattedEmail}`;
+
+      if (type === "letterhead") {
+        // Official Letterhead binding
+        const refContainer = document.querySelector('.meta-ref');
+        if (refVal) {
+          document.getElementById('prevRef').innerText = refVal;
+          refContainer.style.display = 'block';
+        } else {
+          refContainer.style.display = 'none';
+        }
+
+        const dateContainer = document.querySelector('.meta-date');
+        if (dateVal) {
+          document.getElementById('prevDate').innerText = dateVal;
+          dateContainer.style.display = 'block';
+        } else {
+          dateContainer.style.display = 'none';
+        }
+
+        const metaBlock = document.querySelector('.letter-meta');
+        if (!refVal && !dateVal) {
+          metaBlock.style.display = 'none';
+        } else {
+          metaBlock.style.display = 'flex';
+        }
+
+        const recipientContainer = document.querySelector('.letter-recipient');
+        if (recipientText) {
+          document.getElementById('prevRecipient').innerHTML = parseRecipient(recipientText);
+          recipientContainer.style.display = 'block';
+        } else {
+          recipientContainer.style.display = 'none';
+        }
+
+        const subjectVal = document.getElementById('inputSubject').value.trim();
+        const subjectContainer = document.getElementById('prevSubject');
+        if (subjectVal) {
+          subjectContainer.innerText = subjectVal;
+          subjectContainer.style.display = 'block';
+        } else {
+          subjectContainer.style.display = 'none';
+        }
+
+        const salutationVal = document.getElementById('inputSalutation').value.trim();
+        const salutationContainer = document.getElementById('prevSalutation');
+        if (salutationVal) {
+          salutationContainer.innerText = salutationVal;
+          salutationContainer.style.display = 'block';
+        } else {
+          salutationContainer.style.display = 'none';
+        }
+
+        const bodyText = document.getElementById('inputBody').value.trim();
+        const bodyContainer = document.getElementById('prevBody');
+        if (bodyText) {
+          const paragraphs = bodyText.split('\n\n');
+          let bodyHtml = '';
+          paragraphs.forEach(p => {
+            if (p.trim()) {
+              const lines = p.split('\n');
+              let inList = false;
+              let listType = '';
+              let pContent = '';
+              
+              lines.forEach(line => {
+                const trimmedLine = line.trim();
+                if (trimmedLine.startsWith('•') || trimmedLine.startsWith('*') || trimmedLine.startsWith('-')) {
+                  if (!inList) {
+                    if (pContent) {
+                      bodyHtml += `<p>${pContent}</p>`;
+                      pContent = '';
+                    }
+                    bodyHtml += `<ul style="margin-left: 20px; margin-bottom: 12px; list-style-type: disc;">`;
+                    inList = true;
+                    listType = 'ul';
+                  }
+                  const content = trimmedLine.replace(/^[•\*\-\s]+/, '');
+                  bodyHtml += `<li style="margin-bottom: 4px; text-align: justify;">${content}</li>`;
+                } else if (/^\d+[\.\)]\s/.test(trimmedLine)) {
+                  if (!inList) {
+                    if (pContent) {
+                      bodyHtml += `<p>${pContent}</p>`;
+                      pContent = '';
+                    }
+                    bodyHtml += `<ol style="margin-left: 20px; margin-bottom: 12px;">`;
+                    inList = true;
+                    listType = 'ol';
+                  }
+                  const content = trimmedLine.replace(/^\d+[\.\)]\s+/, '');
+                  bodyHtml += `<li style="margin-bottom: 4px; text-align: justify;">${content}</li>`;
+                } else {
+                  if (inList) {
+                    bodyHtml += `</${listType}>`;
+                    inList = false;
+                  }
+                  if (pContent) {
+                    pContent += `<br>${line}`;
+                  } else {
+                    pContent = line;
+                  }
+                }
+              });
+              
+              if (inList) {
+                bodyHtml += `</${listType}>`;
+              } else if (pContent) {
+                bodyHtml += `<p>${pContent}</p>`;
+              }
+            }
+          });
+          bodyContainer.innerHTML = bodyHtml;
+          bodyContainer.style.display = 'block';
+        } else {
+          bodyContainer.style.display = 'none';
+        }
+
+        const signatoryContainer = document.querySelector('.letter-signatory');
+        if (signNameVal || signTitleVal) {
+          document.getElementById('prevSignName').innerText = signNameVal;
+          document.getElementById('prevSignTitle').innerText = signTitleVal;
+          document.getElementById('prevSignName').style.display = signNameVal ? 'block' : 'none';
+          document.getElementById('prevSignTitle').style.display = signTitleVal ? 'block' : 'none';
+          signatoryContainer.style.display = 'block';
+        } else {
+          signatoryContainer.style.display = 'none';
+        }
+
+      } else if (type === "proforma" || type === "commercial" || type === "po") {
+        // Trade Invoice / PO Preview binding
+        const titleEl = document.getElementById("trade-doc-title");
+        const exporterLabel = document.getElementById("trade-exporter-label");
+        const buyerLabel = document.getElementById("trade-buyer-label");
+        const numLabel = document.getElementById("trade-doc-num-label");
+        const dueLabel = document.getElementById("trade-doc-due-label");
+        
+        const bankSection = document.getElementById("trade-bank-details");
+        const declSection = document.getElementById("trade-declaration-box");
+        const shipNotesSection = document.getElementById("trade-shipping-notes");
+
+        if (type === "proforma") {
+          titleEl.textContent = "PROFORMA INVOICE";
+          exporterLabel.textContent = "Exporter (Seller)";
+          buyerLabel.textContent = "Consignee (Buyer)";
+          numLabel.textContent = "Invoice No:";
+          dueLabel.textContent = "Offer Valid Until:";
+          bankSection.style.display = "block";
+          declSection.style.display = "block";
+          shipNotesSection.style.display = "none";
+          
+          document.getElementById("trade-exporter-val").innerHTML = exporterAddressHTML;
+          document.getElementById("trade-buyer-val").innerHTML = parseRecipient(recipientText);
+        } else if (type === "commercial") {
+          titleEl.textContent = "COMMERCIAL INVOICE";
+          exporterLabel.textContent = "Exporter (Seller)";
+          buyerLabel.textContent = "Consignee (Buyer)";
+          numLabel.textContent = "Invoice No:";
+          dueLabel.textContent = "Payment Due Date:";
+          bankSection.style.display = "block";
+          declSection.style.display = "block";
+          shipNotesSection.style.display = "block";
+          
+          document.getElementById("trade-exporter-val").innerHTML = exporterAddressHTML;
+          document.getElementById("trade-buyer-val").innerHTML = parseRecipient(recipientText);
+          document.getElementById("trade-container-seal").textContent = document.getElementById("inputContainerSeal").value;
+        } else if (type === "po") {
+          titleEl.textContent = "PURCHASE ORDER";
+          exporterLabel.textContent = "Buyer (Purchaser)";
+          buyerLabel.textContent = "Supplier (Seller)";
+          numLabel.textContent = "PO Number:";
+          dueLabel.textContent = "Delivery Deadline:";
+          bankSection.style.display = "none";
+          declSection.style.display = "none";
+          shipNotesSection.style.display = "none";
+          
+          document.getElementById("trade-exporter-val").innerHTML = parseRecipient(recipientText);
+          document.getElementById("trade-buyer-val").innerHTML = exporterAddressHTML;
+        }
+
+        document.getElementById("trade-doc-num").textContent = refVal || "-";
+        document.getElementById("trade-doc-date").textContent = dateVal || "-";
+        document.getElementById("trade-doc-due").textContent = document.getElementById("inputDueDate").value || "-";
+        document.getElementById("trade-doc-payment").textContent = document.getElementById("inputPaymentTerms").value || "-";
+        document.getElementById("trade-doc-incoterms").textContent = document.getElementById("inputIncoterms").value || "-";
+        document.getElementById("trade-doc-origin").textContent = document.getElementById("inputOrigin").value || "India";
+        document.getElementById("trade-doc-loading").textContent = document.getElementById("inputPortLoading").value || "-";
+        document.getElementById("trade-doc-discharge").textContent = document.getElementById("inputPortDischarge").value || "-";
+
+        // Render Invoice items Table
+        const currency = document.getElementById("inputCurrency").value;
+        const curSymbol = currency === "INR" ? "₹" : "$";
+        
+        let subtotal = 0;
+        const tbody = document.querySelector("#trade-items-table tbody");
+        tbody.innerHTML = "";
+
+        invoiceItems.forEach((item, index) => {
+          const totalAmt = item.qty * item.price;
+          subtotal += totalAmt;
+          
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td style="font-family: monospace;">${item.hscode || '-'}</td>
+            <td><strong>${item.desc}</strong></td>
+            <td style="text-align: right;">${item.qty} ${item.unit}</td>
+            <td style="text-align: right;">${curSymbol}${item.price.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+            <td style="text-align: right; font-weight: 600;">${curSymbol}${totalAmt.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        if (invoiceItems.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-gray);">No line items added. Click "Add Line Item" in editor.</td></tr>`;
+        }
+
+        const freight = parseFloat(document.getElementById("inputFreight").value) || 0;
+        const insurance = parseFloat(document.getElementById("inputInsurance").value) || 0;
+        const grandTotal = subtotal + freight + insurance;
+
+        document.getElementById("trade-subtotal-val").textContent = `${curSymbol}${subtotal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+        
+        const freightRow = document.getElementById("trade-freight-row");
+        if (freight > 0) {
+          freightRow.style.display = "table-row";
+          document.getElementById("trade-freight-val").textContent = `${curSymbol}${freight.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+        } else {
+          freightRow.style.display = "none";
+        }
+
+        const insRow = document.getElementById("trade-insurance-row");
+        if (insurance > 0) {
+          insRow.style.display = "table-row";
+          document.getElementById("trade-insurance-val").textContent = `${curSymbol}${insurance.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+        } else {
+          insRow.style.display = "none";
+        }
+
+        document.getElementById("trade-total-val").textContent = `${curSymbol}${grandTotal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+
+        // Bank Details
+        document.getElementById("prevBankName").textContent = document.getElementById("inputBankName").value;
+        document.getElementById("prevBankAccountName").textContent = document.getElementById("inputBankAccountName").value;
+        document.getElementById("prevBankAcNo").textContent = document.getElementById("inputBankAcNo").value;
+        document.getElementById("prevBankSwift").textContent = document.getElementById("inputBankSwift").value;
+        document.getElementById("prevBankIfsc").textContent = document.getElementById("inputBankIfsc").value;
+        document.getElementById("prevBankBranch").textContent = document.getElementById("inputBankBranch").value;
+
+        // Declaration & Signatures
+        document.getElementById("prevDeclaration").textContent = document.getElementById("inputDeclaration").value;
+        document.getElementById("trade-sign-name").textContent = signNameVal;
+        document.getElementById("trade-sign-title").textContent = signTitleVal;
+        document.getElementById("trade-sign-company").textContent = companyName;
+
+      } else if (type === "packing") {
+        // Packing List Preview binding
+        setTxt("packing-doc-num", refVal || "-");
+        setTxt("packing-doc-date", dateVal || "-");
+        setTxt("packing-invoice-ref", document.getElementById("inputInvoiceRef").value || "-");
+        setTxt("packing-doc-loading", document.getElementById("inputPortLoading").value || "-");
+        setTxt("packing-doc-discharge", document.getElementById("inputPortDischarge").value || "-");
+        setTxt("packing-doc-marks", document.getElementById("inputShippingMarks").value || "-");
+        setTxt("packing-container-seal", document.getElementById("inputContainerSeal").value || "-");
+        
+        setHTML("packing-exporter-val", exporterAddressHTML);
+        setHTML("packing-buyer-val", parseRecipient(recipientText));
+
+        const tbody = document.querySelector("#packing-items-table tbody");
+        if (tbody) {
+          tbody.innerHTML = "";
+
+          let totalPkgs = 0;
+          let totalQty = 0;
+          let totalNet = 0;
+          let totalGross = 0;
+          let totalCbm = 0;
+
+          packingItems.forEach((item, index) => {
+            totalQty += item.qty;
+            totalNet += item.netwt;
+            totalGross += item.grosswt;
+
+            // Dims CBM calculation
+            let rowCbm = 0;
+            const dimsText = item.dims || "";
+            const dimsMatch = dimsText.toLowerCase().match(/(\d+)\s*[x\*]\s*(\d+)\s*[x\*]\s*(\d+)/);
+            if (dimsMatch) {
+              const l = parseFloat(dimsMatch[1]);
+              const w = parseFloat(dimsMatch[2]);
+              const h = parseFloat(dimsMatch[3]);
+              rowCbm = (l * w * h / 1000000) * item.qty;
+            }
+            totalCbm += rowCbm;
+
+            // Parse range of packages
+            let pkgs = 1;
+            const rangeMatch = item.pkgNo.match(/(\d+)\s*-\s*(\d+)/);
+            if (rangeMatch) {
+              pkgs = parseInt(rangeMatch[2]) - parseInt(rangeMatch[1]) + 1;
+            } else {
+              const singleNum = parseInt(item.pkgNo);
+              if (!isNaN(singleNum)) pkgs = 1;
+            }
+            totalPkgs += pkgs;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td style="font-family: monospace;">${item.pkgNo}</td>
+              <td><strong>${item.desc}</strong></td>
+              <td style="text-align: right;">${item.qty.toLocaleString()}</td>
+              <td style="text-align: right;">${item.netwt.toLocaleString()} kg</td>
+              <td style="text-align: right;">${item.grosswt.toLocaleString()} kg</td>
+              <td style="text-align: right; font-family: monospace;">${item.dims || '-'} ${rowCbm > 0 ? '(' + rowCbm.toFixed(3) + ' CBM)' : ''}</td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          if (packingItems.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-gray);">No packages listed. Click "Add Packages Line" in editor.</td></tr>`;
+          }
+
+          setTxt("packing-total-packages", totalPkgs.toLocaleString() + " packages");
+          setTxt("packing-total-qty", totalQty.toLocaleString() + " units");
+          setTxt("packing-total-netwt", totalNet.toLocaleString() + " kg (" + (totalNet/1000).toFixed(2) + " MT)");
+          setTxt("packing-total-grosswt", totalGross.toLocaleString() + " kg (" + (totalGross/1000).toFixed(2) + " MT)");
+          setTxt("packing-total-cbm", totalCbm > 0 ? totalCbm.toFixed(3) + " CBM" : "Manual / Standard FCL");
+        }
+
+        // Signatures
+        setTxt("packing-sign-name", signNameVal);
+        setTxt("packing-sign-title", signTitleVal);
+        setTxt("packing-sign-company", companyName);
+      } else if (type === "origin") {
+        // Certificate of Origin Preview binding
+        setTxt("coo-cert-num", refVal || "-");
+        setTxt("coo-doc-date", dateVal || "-");
+        setTxt("coo-chamber-val", document.getElementById("inputCooAuthority").value || "-");
+        
+        setHTML("coo-exporter-val", exporterAddressHTML);
+        setHTML("coo-buyer-val", parseRecipient(recipientText));
+        
+        setTxt("coo-transport", document.getElementById("inputContainerSeal").value.split('/')[0] || "Ocean Cargo");
+        setTxt("coo-loading", document.getElementById("inputPortLoading").value || "-");
+        setTxt("coo-discharge", document.getElementById("inputPortDischarge").value || "-");
+        setTxt("coo-marks", document.getElementById("inputShippingMarks").value || "-");
+        
+        let pkgRange = "1-100";
+        let totalQtyStr = "-";
+        let descOfGoods = document.getElementById("inputCooGoodsDesc").value || "-";
+        
+        if (packingItems.length > 0) {
+          pkgRange = packingItems[0].pkgNo;
+          let totalNetWt = 0;
+          packingItems.forEach(item => {
+            totalNetWt += item.netwt;
+          });
+          totalQtyStr = totalNetWt > 0 ? (totalNetWt/1000).toFixed(2) + " MT" : packingItems[0].qty + " Bags";
+        } else if (invoiceItems.length > 0) {
+          let totalQty = 0;
+          let unit = "MT";
+          invoiceItems.forEach(item => {
+            totalQty += item.qty;
+            unit = item.unit;
+          });
+          totalQtyStr = totalQty + " " + unit;
+        }
+        
+        setTxt("coo-table-pkgs", pkgRange);
+        setTxt("coo-table-desc", descOfGoods);
+        setTxt("coo-table-qty", totalQtyStr);
+        
+        setTxt("coo-sign-exporter-name", signNameVal);
+        
+      } else if (type === "phyto") {
+        // Phytosanitary Certificate Preview binding
+        setTxt("phyto-cert-num", refVal || "-");
+        
+        setHTML("phyto-exporter-val", exporterAddressHTML);
+        setHTML("phyto-buyer-val", parseRecipient(recipientText));
+        
+        setTxt("phyto-transport-val", document.getElementById("inputContainerSeal").value.split('/')[0] || "Ocean Cargo Vessel");
+        setTxt("phyto-entry-val", document.getElementById("inputPortDischarge").value || "-");
+        
+        setTxt("phyto-botanical-val", document.getElementById("inputPhytoBotanical").value || "-");
+        setTxt("phyto-cons-val", document.getElementById("inputPhytoConsignment").value || "-");
+        
+        setTxt("phyto-treat-val", document.getElementById("inputPhytoTreatment").value || "-");
+        setTxt("phyto-treat-date", document.getElementById("inputPhytoDate").value || "-");
+        setTxt("phyto-treat-chem", document.getElementById("inputPhytoChemical").value || "-");
+        setTxt("phyto-treat-dose", document.getElementById("inputPhytoDosage").value || "-");
+        setTxt("phyto-treat-dur", document.getElementById("inputPhytoDuration").value || "-");
+        setTxt("phyto-treat-auth", document.getElementById("inputPhytoAuthority").value || "-");
+        setTxt("phyto-sign-name", signNameVal);
+        setTxt("phyto-sign-title", signTitleVal);
+      } else if (type === "sgs") {
+        // SGS Quality Inspection Certificate
+        setTxt("sgs-cert-num", refVal || "SGS-IND-49204");
+        setHTML("sgs-exporter-val", exporterAddressHTML);
+        setHTML("sgs-buyer-val", parseRecipient(recipientText));
+        setTxt("sgs-date-val", (document.getElementById("inputPortLoading").value.split(',')[0] || "Port") + ", " + dateVal);
+        setTxt("sgs-container-val", document.getElementById("inputContainerSeal").value || "-");
+      } else if (type === "shippingbill") {
+        // Shipping Bill ICEGATE Receipt
+        setTxt("sb-bill-num", refVal || "S/B 482910");
+        setTxt("sb-date-val", dateVal);
+        setTxt("sb-port-loading", document.getElementById("inputPortLoading").value || "-");
+        setTxt("sb-port-discharge", document.getElementById("inputPortDischarge").value || "-");
+        
+        // Render item details table
+        const tbody = document.getElementById("sb-table-body");
+        if (tbody) {
+          tbody.innerHTML = "";
+          let totalFob = 0;
+          let idx = 1;
+          invoiceItems.forEach(item => {
+            const row = document.createElement("tr");
+            const amt = item.qty * item.price;
+            totalFob += amt;
+            row.innerHTML = `
+              <td>${idx++}</td>
+              <td style="font-family: monospace;">${item.hs || '10063020'}</td>
+              <td style="font-weight: 600;">${item.desc}</td>
+              <td style="text-align: right;">${item.qty} ${item.unit}</td>
+              <td style="text-align: right; font-weight: 700;">$${amt.toLocaleString()}</td>
+            `;
+            tbody.appendChild(row);
+          });
+          setTxt("sb-qty-val", invoiceItems.map(i => i.qty + " " + i.unit).join(', ') || "-");
+          setTxt("sb-val-val", "$" + totalFob.toLocaleString());
+        }
+      } else if (type === "leo") {
+        // LEO Customs Clearance
+        setTxt("leo-cert-num", refVal || "LEO-NSA-993024");
+        setTxt("leo-date-val", dateVal);
+        setTxt("leo-sb-ref", document.getElementById("inputInvoiceRef").value || "S/B 482910");
+        setTxt("leo-port-val", document.getElementById("inputPortLoading").value || "-");
+        setTxt("leo-container-val", document.getElementById("inputContainerSeal").value || "-");
+      } else if (type === "lading") {
+        // Bill of Lading
+        setTxt("bl-bill-num", refVal || "MSK-JNPT-48201");
+        setHTML("bl-shipper-val", exporterAddressHTML);
+        setHTML("bl-consignee-val", parseRecipient(recipientText));
+        setTxt("bl-vessel-val", "MSC VALERIA V.402");
+        setTxt("bl-loading-val", document.getElementById("inputPortLoading").value || "-");
+        setTxt("bl-discharge-val", document.getElementById("inputPortDischarge").value || "-");
+        setTxt("bl-container-val", document.getElementById("inputContainerSeal").value || "-");
+        
+        let descOfGoods = "Export Cargo Containers";
+        let totalNet = "25.0 MT";
+        let totalGross = "26.2 MT";
+        if (invoiceItems.length > 0) {
+          descOfGoods = invoiceItems.map(i => i.desc).join(', ');
+        }
+        if (packingItems.length > 0) {
+          totalNet = packingItems.reduce((acc, i) => acc + (parseFloat(i.net) || 0), 0) + " MT";
+          totalGross = packingItems.reduce((acc, i) => acc + (parseFloat(i.gross) || 0), 0) + " MT";
+        }
+        setTxt("bl-goods-val", descOfGoods);
+        setTxt("bl-gross-val", totalGross);
+        setTxt("bl-net-val", totalNet);
+      } else if (type === "ebrc") {
+        // e-BRC realization
+        setTxt("ebrc-bank-name", document.getElementById("inputBankName").value || "State Bank of India");
+        setTxt("ebrc-ad-code", document.getElementById("inputBankBranch").value || "AD Code: 0109284");
+        setHTML("ebrc-exporter-val", exporterAddressHTML);
+        setTxt("ebrc-cert-num", refVal || "EBRC-SBI-883910");
+        setTxt("ebrc-date-val", dateVal);
+        setTxt("ebrc-currency-val", document.getElementById("inputCurrency").value || "USD");
+        
+        let totalFob = 0;
+        invoiceItems.forEach(item => {
+          totalFob += item.qty * item.price;
+        });
+        setTxt("ebrc-fob-val", "$" + totalFob.toLocaleString());
+        setTxt("ebrc-rate-val", document.getElementById("inputCurrency").value === "USD" ? "83.50 INR/USD" : "91.42 INR/EUR");
+      }
+
+      const prevFooter = document.getElementById('prevFooter');
+      if (prevFooter) prevFooter.innerHTML = getFooterHTML(currentStyle);
+    }
+
+    // Save and print layout
+    function printLetterhead() {
+      window.print();
+    }
+
+    // Reset editor content based on current doc type
+    function clearAllContent() {
+      if (confirm("Are you sure you want to clear the document fields?")) {
+        document.getElementById('inputRef').value = '';
+        document.getElementById('inputRecipient').value = '';
+        
+        const type = document.getElementById("inputDocType").value;
+        if (type === "letterhead") {
+          document.getElementById('inputSubject').value = '';
+          document.getElementById('inputSalutation').value = 'Dear Sir/Madam,';
+          document.getElementById('inputBody').value = '';
+        } else if (type === "proforma" || type === "commercial" || type === "po") {
+          invoiceItems = [];
+          renderInvoiceItemEditor();
+        } else if (type === "packing") {
+          packingItems = [];
+          renderPackingItemEditor();
+        }
+        updateLivePreview();
+      }
+    }
+
+    // Loads complete structured mock scenarios for each document type
+    function loadSampleContent() {
+      const type = document.getElementById("inputDocType").value;
+      
+      // Default branding details
+      document.getElementById('inputCompanyName').value = 'Vishnu Balaji Global';
+      document.getElementById('inputCompanySubtitle').value = 'Imports & Exports';
+      document.getElementById('inputTagline').value = 'Direct Farm-to-Shipment Solutions';
+      document.getElementById('inputPhone').value = '+91 91606 66483';
+      document.getElementById('inputEmail').value = 'sales@vishnubalajiglobal.com, depu.sep13@gmail.com';
+      document.getElementById('inputWebsite').value = 'vishnubalajiglobal.com';
+      document.getElementById('inputAddress').value = 'Hyderabad, Telangana, India';
+      document.getElementById('inputSignName').value = 'Sandeep Solanke';
+      document.getElementById('inputSignTitle').value = 'Trade Director';
+      resetLogo();
+
+      if (type === "letterhead") {
+        document.getElementById('inputRef').value = 'VBGE/2026/QT-1092';
+        document.getElementById('inputDate').value = 'July 07, 2026';
+        document.getElementById('inputRecipient').value = `Mr. David Thompson\nDirector of Procurement\nGlobal Agro Trading LLC\n142 Wall Street, New York, NY 10005, USA`;
+        document.getElementById('inputSubject').value = 'OFFICIAL COMPLIANCE & COMMERCIAL QUOTATION - BASMATI & WHEAT SOURCING';
+        document.getElementById('inputSalutation').value = 'Dear Mr. Thompson,';
+        document.getElementById('inputBody').value = `We thank you for your official RFQ dated July 2, 2026, and your interest in our premium agricultural commodities. We are pleased to submit our formal commercial quotation for the supply of Super-Aged 1121 Basmati Rice and Premium Grade-A Milling Wheat.
+
+Our 1121 Basmati Rice is aged for a minimum of 18 months to achieve optimal grain elongation (8.35mm+) and the distinct aroma requested. Our Milling Wheat is sourced directly from our certified farms in Madhya Pradesh, ensuring a consistent wet gluten level of 26% min and protein index above 12% on a dry basis.
+
+We offer these products under standard FOB Mundra/JNPT port terms, or CFR/CIF to your designated port. Payment is accepted via 100% Irrevocable Letter of Credit (L/C) at sight or 30% advance T/T with the 70% balance against scan of Bill of Lading. All shipments are subject to SGS or Bureau Veritas quality verification prior to sealing.
+
+Please find the detailed specifications sheet and pricing structure attached to this letter. We look forward to establishing a mutually beneficial trade partnership.`;
+
+      } else if (type === "proforma" || type === "commercial") {
+        document.getElementById('inputRef').value = type === "proforma" ? 'VBG/2026/PI-4820' : 'VBG/2026/CI-4820';
+        document.getElementById('inputDate').value = 'July 18, 2026';
+        document.getElementById('inputDueDate').value = 'August 18, 2026';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPaymentTerms').value = '100% Irrevocable L/C at sight';
+        document.getElementById('inputIncoterms').value = 'CIF Khalifa Port, Abu Dhabi';
+        document.getElementById('inputOrigin').value = 'India';
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        
+        document.getElementById('inputFreight').value = 1500;
+        document.getElementById('inputInsurance').value = 380;
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+
+        invoiceItems = [
+          { desc: "Super-Aged 1121 Basmati Rice (20kg PP bags)", hscode: "1006.3010", qty: 50, unit: "MT", price: 950 },
+          { desc: "Non-Basmati Long Grain White Rice (5% Broken)", hscode: "1006.3090", qty: 100, unit: "MT", price: 620 }
+        ];
+        
+        renderInvoiceItemEditor();
+
+      } else if (type === "po") {
+        // Buyer Purchase Order Mock
+        document.getElementById('inputRef').value = 'ADF/2026/PO-9903';
+        document.getElementById('inputDate').value = 'July 12, 2026';
+        document.getElementById('inputDueDate').value = 'August 30, 2026';
+        
+        // Exporter fields are the vendor, Recipient details shows the Buyer (Abu Dhabi Food Co)
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Division\nAbu Dhabi, UAE`;
+        
+        document.getElementById('inputPaymentTerms').value = '30% Advance T/T, 70% against BL scan';
+        document.getElementById('inputIncoterms').value = 'FOB JNPT Port, India';
+        document.getElementById('inputOrigin').value = 'India';
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        
+        document.getElementById('inputFreight').value = 0;
+        document.getElementById('inputInsurance').value = 0;
+
+        invoiceItems = [
+          { desc: "Premium Grade-A Indian Milling Wheat", hscode: "1001.9900", qty: 120, unit: "MT", price: 310 }
+        ];
+        
+        renderInvoiceItemEditor();
+
+      } else if (type === "packing") {
+        document.getElementById('inputRef').value = 'VBG/2026/PL-4820';
+        document.getElementById('inputDate').value = 'July 18, 2026';
+        document.getElementById('inputInvoiceRef').value = 'VBG/2026/CI-4820';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputShippingMarks').value = 'VBG / ABU DHABI / BAGS 1-7500';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+
+        packingItems = [
+          { pkgNo: "1-2500", desc: "1121 Basmati Rice in 20kg PP Bags", qty: 2500, netwt: 50000, grosswt: 50500, dims: "120x80x160" },
+          { pkgNo: "2501-7500", desc: "Non-Basmati White Rice in 20kg PP Bags", qty: 5000, netwt: 100000, grosswt: 101000, dims: "120x80x160" }
+        ];
+
+        renderPackingItemEditor();
+      } else if (type === "origin") {
+        document.getElementById('inputRef').value = 'VBG/2026/COO-8840';
+        document.getElementById('inputDate').value = 'July 18, 2026';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputShippingMarks').value = 'VBG / ABU DHABI / BAGS 1-7500';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+        
+        document.getElementById('inputCooAuthority').value = 'Indian Chamber of Commerce & Industry';
+        document.getElementById('inputCooGoodsDesc').value = 'Super-Aged 1121 Indian Basmati Rice, protein content 8.5%, grain length 8.35mm+.';
+
+      } else if (type === "phyto") {
+        document.getElementById('inputRef').value = 'PSC/2026/492810';
+        document.getElementById('inputDate').value = 'July 18, 2026';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+        
+        document.getElementById('inputPhytoBotanical').value = 'Oryza sativa (Rice)';
+        document.getElementById('inputPhytoConsignment').value = '7500 PP Bags of Aged Basmati & White Rice';
+        document.getElementById('inputPhytoTreatment').value = 'FUMIGATION';
+        document.getElementById('inputPhytoDate').value = 'July 15, 2026';
+        document.getElementById('inputPhytoChemical').value = 'Methyl Bromide (CH3Br)';
+        document.getElementById('inputPhytoDosage').value = '32 g/m³';
+        document.getElementById('inputPhytoDuration').value = '24 Hours at 28°C';
+        document.getElementById('inputPhytoAuthority').value = 'Directorate of Plant Protection, Quarantine & Storage, India';
+      } else if (type === "sgs") {
+        document.getElementById('inputRef').value = 'SGS/2026/SG-77492';
+        document.getElementById('inputDate').value = 'July 18, 2026';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+      } else if (type === "shippingbill") {
+        document.getElementById('inputRef').value = 'S/B 482910';
+        document.getElementById('inputDate').value = 'July 19, 2026';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+        
+        invoiceItems = [
+          { desc: "Super-Aged 1121 Basmati Rice (20kg PP bags)", hscode: "1006.3010", qty: 50, unit: "MT", price: 950 },
+          { desc: "Non-Basmati Long Grain White Rice (5% Broken)", hscode: "1006.3090", qty: 100, unit: "MT", price: 620 }
+        ];
+        renderInvoiceItemEditor();
+      } else if (type === "leo") {
+        document.getElementById('inputRef').value = 'LEO-NSA-993024';
+        document.getElementById('inputDate').value = 'July 20, 2026';
+        document.getElementById('inputInvoiceRef').value = 'S/B 482910';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+      } else if (type === "lading") {
+        document.getElementById('inputRef').value = 'MSK-JNPT-48201';
+        document.getElementById('inputDate').value = 'July 21, 2026';
+        document.getElementById('inputRecipient').value = `Abu Dhabi Food Co\nImport Procurement Division\nSector 4, Khalifa Port Freezone\nAbu Dhabi, United Arab Emirates`;
+        
+        document.getElementById('inputPortLoading').value = 'JNPT Port, Mumbai, India';
+        document.getElementById('inputPortDischarge').value = 'Khalifa Port, Abu Dhabi, UAE';
+        document.getElementById('inputContainerSeal').value = 'MEDU8849102 / Seal: 482910';
+        
+        invoiceItems = [
+          { desc: "Super-Aged 1121 Basmati Rice (20kg PP bags)", hscode: "1006.3010", qty: 50, unit: "MT", price: 950 }
+        ];
+        renderInvoiceItemEditor();
+        
+        packingItems = [
+          { pkgNo: "1-2500", desc: "1121 Basmati Rice in 20kg PP Bags", qty: 2500, netwt: 50000, grosswt: 50500, dims: "120x80x160" }
+        ];
+        renderPackingItemEditor();
+      } else if (type === "ebrc") {
+        document.getElementById('inputRef').value = 'EBRC-SBI-883910';
+        document.getElementById('inputDate').value = 'July 22, 2026';
+        document.getElementById('inputBankName').value = 'State Bank of India';
+        document.getElementById('inputBankBranch').value = 'Commercial AD Branch Hyderabad (AD Code: 0109284)';
+        document.getElementById('inputCurrency').value = 'USD';
+        
+        invoiceItems = [
+          { desc: "Super-Aged 1121 Basmati Rice (20kg PP bags)", hscode: "1006.3010", qty: 50, unit: "MT", price: 950 }
+        ];
+        renderInvoiceItemEditor();
+      }
+
+      updateLivePreview();
+    }
+
+    // Toggle Blank A4 Sheet Mode
+    function toggleEmptyMode() {
+      const isChecked = document.getElementById('emptyModeToggle').checked;
+      const paper = document.getElementById('a4Paper');
+      if (isChecked) {
+        paper.classList.add('empty-mode');
+      } else {
+        paper.classList.remove('empty-mode');
+      }
+    }
+  </script>
+</body>
+</html>
