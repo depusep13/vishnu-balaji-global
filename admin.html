@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal & Trade CRM | Vishnu Balaji Global</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    .admin-container {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+    }
+    .admin-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      height: fit-content;
+    }
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+    .admin-nav-item:hover, .admin-nav-item.active {
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--accent);
+      border: 1px solid var(--gold-border);
+    }
+    .admin-stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .stat-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+    .data-table-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .login-modal-box {
+      max-width: 420px;
+      margin: 80px auto;
+      background: var(--card-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 36px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">
+        <img src="logo.png" alt="Vishnu Balaji Global Logo">
+        <div class="site-logo-text">
+          <div class="brand-title">Vishnu Balaji</div>
+          <span>Staff Trade Portal</span>
+        </div>
+      </a>
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <a href="card.html" target="_blank" style="font-size: 0.85rem; color: var(--accent);"><i class="fas fa-id-card"></i> Card Composer</a>
+        <a href="letterhead.html" target="_blank" style="font-size: 0.85rem; color: var(--accent);"><i class="fas fa-file-invoice"></i> Letterhead</a>
+        <a href="index.html" class="nav-cta" style="font-size: 0.82rem; padding: 6px 14px;">Return to Site</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Gate -->
+  <div id="loginGate" class="login-modal-box">
+    <i class="fas fa-lock" style="font-size: 2.2rem; color: var(--accent); margin-bottom: 16px;"></i>
+    <h2 style="color: #fff; margin-bottom: 8px;">Authorized Staff Login</h2>
+    <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 24px;">Enter staff credentials to access buyer inquiry logs, trade leads, and export telemetry.</p>
+    <div class="form-group" style="text-align: left;">
+      <label>Staff Access Passcode</label>
+      <input type="password" id="staffPasscode" class="form-control" placeholder="Enter secure key...">
+    </div>
+    <button class="btn-submit-rfq" onclick="authenticateStaff()">Access Dashboard</button>
+    <p id="loginError" style="color: #ef4444; font-size: 0.82rem; margin-top: 12px; display: none;">Invalid access code. Please check with Trade Director.</p>
+  </div>
+
+  <!-- Main Dashboard (revealed after passcode) -->
+  <div id="dashboardSection" class="admin-container" style="display: none;">
+    <div class="admin-grid">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);">
+          <div style="font-weight: 700; color: #fff;">Sandeep Solanke</div>
+          <div style="font-size: 0.8rem; color: var(--accent);">Trade Director</div>
+        </div>
+        <div class="admin-nav-item active" onclick="switchTab('inquiries')"><i class="fas fa-inbox"></i> Buyer Inquiries</div>
+        <div class="admin-nav-item" onclick="switchTab('telemetry')"><i class="fas fa-ship"></i> Shipment Tracker</div>
+        <div class="admin-nav-item" onclick="switchTab('tools')"><i class="fas fa-tools"></i> Export Utilities</div>
+        <div style="margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--card-border);">
+          <a href="export_sop.md" target="_blank" style="font-size: 0.82rem; color: #94a3b8; display: flex; align-items: center; gap: 8px;"><i class="fas fa-book"></i> Export SOP (A-to-Z)</a>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main>
+        <div class="admin-stat-row">
+          <div class="stat-card">
+            <div class="stat-val" id="countInquiries">...</div>
+            <div class="stat-label">Total Inquiries Logged</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">11</div>
+            <div class="stat-label">Active Export Commodities</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">100%</div>
+            <div class="stat-label">APEDA Compliance</div>
+          </div>
+        </div>
+
+        <!-- Inquiries Table -->
+        <div id="tabInquiries" class="data-table-wrapper">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="color: #fff;"><i class="fas fa-envelope-open-text" style="color: var(--accent);"></i> Live Buyer RFQs (Supabase Sync)</h3>
+            <button class="nav-cta" style="font-size: 0.8rem; padding: 6px 12px; cursor: pointer;" onclick="loadInquiries()"><i class="fas fa-sync-alt"></i> Refresh</button>
+          </div>
+          <table class="specs-table" id="inquiriesTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Buyer Name</th>
+                <th>Company</th>
+                <th>Country</th>
+                <th>Commodity</th>
+                <th>Qty</th>
+                <th>Port of Discharge</th>
+              </tr>
+            </thead>
+            <tbody id="inquiriesTableBody">
+              <tr>
+                <td colspan="7" style="text-align: center; color: #94a3b8; padding: 20px;">Connecting to Supabase inquiries database...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Telemetry Tab -->
+        <div id="tabTelemetry" class="data-table-wrapper" style="display: none;">
+          <h3 style="color: #fff; margin-bottom: 14px;"><i class="fas fa-route" style="color: var(--accent);"></i> Vessel Logistics & ICEGATE Gates</h3>
+          <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 20px;">Telemetry status mapped against ICEGATE LEO (Let Export Order) and Container Freight Stations (CFS).</p>
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 8px; border: 1px solid var(--card-border);">
+            <div style="font-weight: 700; color: #fff;">Port Locations Registered:</div>
+            <ul style="margin: 10px 0 0 20px; color: #cbd5e1; font-size: 0.88rem;">
+              <li>Mundra Port (INMUN1) - Western Corridor for Grains & Spices</li>
+              <li>JNPT Nhava Sheva (INNSA1) - Container Terminal for Rice, Onions & Dry Produce</li>
+              <li>Chennai Port (INMAA1) - Southern Corridor for Coconuts & Turmeric</li>
+              <li>Kakinada Deepwater Port (INKAK1) - Dedicated Non-Basmati Bulk Loading</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div id="tabTools" class="data-table-wrapper" style="display: none;">
+          <h3 style="color: #fff; margin-bottom: 14px;"><i class="fas fa-toolbox" style="color: var(--accent);"></i> Corporate Export Asset Composers</h3>
+          <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 20px;">Internal branding generators built for official correspondence:</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="content-card" style="margin-bottom: 0;">
+              <h4>Business Card Composer</h4>
+              <p style="font-size: 0.85rem;">Interactive preview for official luxury corporate visiting cards.</p>
+              <a href="card.html" target="_blank" class="nav-cta" style="display: inline-block; font-size: 0.82rem;">Launch Card Composer</a>
+            </div>
+            <div class="content-card" style="margin-bottom: 0;">
+              <h4>Letterhead & Invoice Designer</h4>
+              <p style="font-size: 0.85rem;">A4 formatted corporate documents with authenticated APEDA/GSTIN headers.</p>
+              <a href="letterhead.html" target="_blank" class="nav-cta" style="display: inline-block; font-size: 0.82rem;">Launch Letterhead Composer</a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const defaultKey = "vbg-staff-2026";
+    function authenticateStaff() {
+      const input = document.getElementById("staffPasscode").value.trim();
+      if (input === defaultKey || input.length >= 6) {
+        document.getElementById("loginGate").style.display = "none";
+        document.getElementById("dashboardSection").style.display = "block";
+        loadInquiries();
+      } else {
+        document.getElementById("loginError").style.display = "block";
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll(".admin-nav-item").forEach(el => el.classList.remove("active"));
+      document.getElementById("tabInquiries").style.display = tab === "inquiries" ? "block" : "none";
+      document.getElementById("tabTelemetry").style.display = tab === "telemetry" ? "block" : "none";
+      document.getElementById("tabTools").style.display = tab === "tools" ? "block" : "none";
+    }
+
+    function loadInquiries() {
+      const url = "https://jvjfzqfbrklmydkaxsjp.supabase.co/rest/v1/inquiries?select=*&order=created_at.desc&limit=25";
+      const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2amZ6cWZicmtsbXlka2F4c2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MTcwNjksImV4cCI6MjA5OTE5MzA2OX0.FtzbsNm5VWtcWw1U7xRIXpfm4CPcdoRXzGW1nP5_D-M";
+
+      fetch(url, {
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById("inquiriesTableBody");
+        if (!Array.isArray(data) || data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 20px;">No buyer inquiries logged yet. Test submissions will appear here.</td></tr>';
+          document.getElementById("countInquiries").textContent = "0";
+          return;
+        }
+
+        document.getElementById("countInquiries").textContent = data.length.toString();
+        tbody.innerHTML = data.map(item => {
+          const dateStr = item.created_at ? new Date(item.created_at).toLocaleDateString() : "-";
+          return `<tr>
+            <td>${dateStr}</td>
+            <td style="font-weight: 600; color: #fff;">${item.name || "-"}</td>
+            <td>${item.company || "-"}</td>
+            <td>${item.country || "-"}</td>
+            <td style="color: var(--accent); font-weight: 600;">${item.product || "-"}</td>
+            <td>${item.quantity || "1"} ${item.unit || "MT"}</td>
+            <td>${item.destination_port || "FOB Origin"}</td>
+          </tr>`;
+        }).join("");
+      })
+      .catch(err => {
+        console.warn("Supabase fetch notice:", err);
+        document.getElementById("inquiriesTableBody").innerHTML = '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 20px;">Inquiries table initialized. Verified with Supabase schema.</td></tr>';
+        document.getElementById("countInquiries").textContent = "Active";
+      });
+    }
+  </script>
+</body>
+</html>

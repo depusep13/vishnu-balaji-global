@@ -1,0 +1,12 @@
+# robots.txt for Vishnu Balaji Global Imports & Exports
+# https://vishnubalajiglobal.com/
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /letterhead.html
+Disallow: /*.sql
+Disallow: /*.md
+
+# Sitemap declaration
+Sitemap: https://vishnubalajiglobal.com/sitemap.xml
