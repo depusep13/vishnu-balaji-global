@@ -9,4 +9,4 @@ Disallow: /*.sql
 Disallow: /*.md
 
 # Sitemap declaration
-Sitemap: https://vishnubalajiglobal.com/sitemap.xml
+Sitemap: https://www.vishnubalajiglobal.com/sitemap.xml
