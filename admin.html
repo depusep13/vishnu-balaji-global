@@ -118,10 +118,7 @@
       </div>
     </div>
     <button class="btn-submit-rfq" onclick="authenticateStaff()" style="width: 100%;">Access Dashboard</button>
-    <p id="loginError" style="color: #ef4444; font-size: 0.82rem; margin-top: 12px; display: none;"><i class="fas fa-exclamation-triangle"></i> Invalid access code. Please check credentials.</p>
-    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.8rem; color: #94a3b8;">
-      Default Master Passcode: <code style="color: var(--accent); background: rgba(212,175,55,0.12); padding: 3px 8px; border-radius: 4px; font-weight: 700; font-family: monospace;">vbg-staff-2026</code>
-    </div>
+    <p id="loginError" style="color: #ef4444; font-size: 0.85rem; margin-top: 14px; display: none; font-weight: 600;"><i class="fas fa-times-circle"></i> Incorrect password. Access denied.</p>
   </div>
 
   <!-- Main Dashboard (revealed after passcode) -->
@@ -240,10 +237,10 @@
   </div>
 
   <script>
-    const defaultKeys = ["vbg-staff-2026", "vbg2026", "admin2026", "sandeep2026"];
+    const MASTER_PASSCODE = "vbg-staff-2026";
 
     function getActivePasscode() {
-      return localStorage.getItem("vbg_custom_passcode") || "vbg-staff-2026";
+      return localStorage.getItem("vbg_custom_passcode") || MASTER_PASSCODE;
     }
 
     function togglePasswordVisibility() {
@@ -262,12 +259,10 @@
 
     function authenticateStaff() {
       const input = document.getElementById("staffPasscode").value.trim();
-      const customKey = localStorage.getItem("vbg_custom_passcode");
-      if (
-        (customKey && input === customKey) ||
-        defaultKeys.includes(input.toLowerCase()) ||
-        input.length >= 6
-      ) {
+      const currentValidKey = getActivePasscode();
+
+      // STRICT EXACT MATCH ONLY - NO LOOSE PASSWORDS ALLOWED:
+      if (input.length > 0 && (input === currentValidKey || input === MASTER_PASSCODE)) {
         sessionStorage.setItem("vbg_staff_authenticated", "true");
         document.getElementById("loginGate").style.display = "none";
         document.getElementById("dashboardSection").style.display = "block";
@@ -277,6 +272,11 @@
         loadInquiries();
       } else {
         document.getElementById("loginError").style.display = "block";
+        const field = document.getElementById("staffPasscode");
+        field.style.borderColor = "#ef4444";
+        setTimeout(() => {
+          field.style.borderColor = "";
+        }, 2000);
       }
     }
 
@@ -287,6 +287,7 @@
       document.getElementById("navLogoutBtn").style.display = "none";
       document.getElementById("staffPasscode").value = "";
       document.getElementById("loginError").style.display = "none";
+      document.getElementById("staffPasscode").focus();
     }
 
     function saveCustomPasscode() {
