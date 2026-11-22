@@ -124,4 +124,18 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Trade Corridor Buyer Hubs -->
+  <url>
+    <loc>https://www.vishnubalajiglobal.com/destinations/dubai-uae-agricultural-exports.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.vishnubalajiglobal.com/destinations/saudi-arabia-agricultural-exports.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>

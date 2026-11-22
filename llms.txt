@@ -33,6 +33,11 @@
 - [FOB vs CIF Incoterms for Agricultural Importers](https://www.vishnubalajiglobal.com/guides/fob-vs-cif-incoterms-agricultural-export.html): Risk transfer matrix, ocean freight handling, demurrage prevention, and insurance allocation.
 - [International Export Markets Buying Guide](https://www.vishnubalajiglobal.com/guides/international-export-markets-buying-guide.html): Compliance specifications for GCC (SASO, ESMA), EU (MRL pesticide limits), and Southeast Asian import standards.
 
+
+## Priority Trade Corridors & Destination Hubs
+- [UAE & Dubai Export Hub](https://www.vishnubalajiglobal.com/destinations/dubai-uae-agricultural-exports.html): Direct maritime corridor to Jebel Ali Port (3–5 days transit). Specializing in 1121 Sella Basmati, Spices, and Onions.
+- [Saudi Arabia Export Hub](https://www.vishnubalajiglobal.com/destinations/saudi-arabia-agricultural-exports.html): SFDA and SASO compliant shipments to King Abdulaziz Port (Dammam) and Jeddah Islamic Port.
+
 ## Contact & Procurement Endpoints
 - **Container RFQ Form**: https://www.vishnubalajiglobal.com/#rfq
 - **Direct Trade Desk**: +91-9160666483 (Voice / WhatsApp Business)

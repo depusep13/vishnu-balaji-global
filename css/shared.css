@@ -808,3 +808,97 @@ footer.site-footer {
   font-size: 0.82rem;
   color: var(--accent);
 }
+
+
+/* ==========================================================================
+   FLOATING WHATSAPP TRADE DESK BUTTON WITH PULSE EFFECT
+   ========================================================================== */
+.whatsapp-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25D366, #1ebe5d);
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  z-index: 9999;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.whatsapp-btn-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25D366;
+  opacity: 0.4;
+  z-index: -1;
+  animation: pulseWa 2s infinite;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.55);
+  color: #ffffff !important;
+}
+
+.whatsapp-btn::after {
+  content: "Chat with Trade Desk";
+  position: absolute;
+  right: 74px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #051630;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 30px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.whatsapp-btn:hover::after {
+  opacity: 1;
+}
+
+@keyframes pulseWa {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .whatsapp-btn {
+    right: 18px;
+    bottom: 18px;
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+  .whatsapp-btn::after {
+    display: none;
+  }
+}
