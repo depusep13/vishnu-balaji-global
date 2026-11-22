@@ -117,4 +117,11 @@
     <priority>0.5</priority>
   </url>
 
+  <!-- AI Agent Discovery Endpoint -->
+  <url>
+    <loc>https://www.vishnubalajiglobal.com/llms.txt</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

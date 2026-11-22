@@ -1,12 +1,59 @@
-# robots.txt for Vishnu Balaji Global Imports & Exports
-# https://vishnubalajiglobal.com/
+# /robots.txt for Vishnu Balaji Global Imports & Exports
+# Website: https://www.vishnubalajiglobal.com/
+# Canonical Domain: https://www.vishnubalajiglobal.com
 
+# -----------------------------------------------------------------------------
+# 1. GENERAL CRAWLERS (Googlebot, Bingbot, Yandex, DuckDuckBot, etc.)
+# -----------------------------------------------------------------------------
 User-agent: *
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /guides/
+Allow: /products/
+Allow: /images/
 Disallow: /admin.html
 Disallow: /letterhead.html
 Disallow: /*.sql
-Disallow: /*.md
 
-# Sitemap declaration
+# -----------------------------------------------------------------------------
+# 2. AI RETRIEVAL & GENERATIVE SEARCH ENGINES (GEO / AIO)
+# Explicitly welcome leading AI search & foundation model agents
+# -----------------------------------------------------------------------------
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+# -----------------------------------------------------------------------------
+# 3. SITEMAP & AI DISCOVERY ENDPOINTS
+# -----------------------------------------------------------------------------
 Sitemap: https://www.vishnubalajiglobal.com/sitemap.xml

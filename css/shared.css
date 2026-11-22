@@ -706,3 +706,105 @@ footer.site-footer {
     text-align: center;
   }
 }
+
+
+/* ==========================================================================
+   AEO & GEO Optimization Components (Inverted Pyramid Answers & Executive Attribution)
+   ========================================================================== */
+
+.aeo-direct-answer {
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid var(--gold-border);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.aeo-direct-answer h2 {
+  font-size: 1.25rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aeo-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.aeo-lead strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.aeo-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.aeo-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.geo-executive-quote {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 28px 0;
+  position: relative;
+}
+
+.geo-quote-text {
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 1.75;
+  color: #e2e8f0;
+  margin-bottom: 16px;
+}
+
+.geo-attribution {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.geo-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  color: var(--primary-dark);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.geo-author {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--white);
+}
+
+.geo-title {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--accent);
+}
